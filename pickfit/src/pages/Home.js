@@ -14,11 +14,11 @@ const Home = () => {
   const [remainingTime, setRemainingTime] = useState(0);
   const [animateSection, setAnimateSection] = useState(false); // 애니메이션 상태
 
-  
+
 
   const secondSectionRef = useRef(null);
 
-  
+
 
   const formatTime = (seconds) => {
     const minutes = Math.floor(seconds / 60);
@@ -73,17 +73,17 @@ const Home = () => {
       (entries) => {
         entries.forEach((entry) => {
           const animationElement = document.querySelector(".animationStatus"); // 클래스 선택
-    
+
           if (entry.isIntersecting) {
             setAnimateSection(true);
-    
+
             // animationStatus 클래스의 opacity를 1로 설정
             if (animationElement) {
               animationElement.style.opacity = "1";
             }
           } else {
             setAnimateSection(false); // 애니메이션 초기화
-    
+
             // animationStatus 클래스의 opacity를 0으로 설정
             if (animationElement) {
               animationElement.style.opacity = "0";
@@ -121,7 +121,6 @@ const Home = () => {
         remainingTime={formatTime(remainingTime)}
         handleLockClick={handleLockClick}
       />
-
       <div style={{ marginTop: "60px" }}>
         <ReactFullpage
           scrollingSpeed={1000}
@@ -161,11 +160,10 @@ const Home = () => {
                 }}
               >
                 {/* 텍스트 배치 */}
-                <div class="animationStatus" style={{ position: "relactive", width: "100%", height: "100%"}}>
+                <div class="animationStatus" style={{ position: "relactive", width: "100%", height: "100%" }}>
                   <div
-                    className={`animate__animated ${
-                      animateSection ? "animate__fadeInLeft" : ""
-                    }`}
+                    className={`animate__animated ${animateSection ? "animate__fadeInLeft" : ""
+                      }`}
                     style={{ ...styles.textContainer, top: "10%", left: "10%" }}
                   >
                     <span style={styles.yellowDot}>●</span>
@@ -178,9 +176,8 @@ const Home = () => {
                   </div>
 
                   <div
-                    className={`animate__animated ${
-                      animateSection ? "animate__fadeInLeft" : ""
-                    }`}
+                    className={`animate__animated ${animateSection ? "animate__fadeInLeft" : ""
+                      }`}
                     style={{ ...styles.textContainer, top: "30%", left: "40%" }}
                   >
                     <span style={styles.yellowDot}>●</span>
@@ -193,9 +190,8 @@ const Home = () => {
                   </div>
 
                   <div
-                    className={`animate__animated ${
-                      animateSection ? "animate__fadeInUp" : ""
-                    }`}
+                    className={`animate__animated ${animateSection ? "animate__fadeInUp" : ""
+                      }`}
                     style={{ ...styles.textContainer, top: "70%", left: "20%" }}
                   >
                     <span style={styles.yellowDot}>●</span>
@@ -208,49 +204,43 @@ const Home = () => {
                   </div>
 
                   <div
-                    className={`animate__animated ${
-                      animateSection ? "animate__fadeInRight" : ""
-                    }`}
+                    className={`animate__animated ${animateSection ? "animate__fadeInRight" : ""
+                      }`}
                     style={{ ...styles.textContainer, top: "70%", left: "60%" }}
                   >
                     <span style={styles.yellowDot}>●</span>
                     <strong style={styles.title}>
-                    <span style={styles.pickfitFont}>PickFit</span>으로 쇼핑의 새로운 경험을!
+                      <span style={styles.pickfitFont}>PickFit</span>으로 쇼핑의 새로운 경험을!
                     </strong>
                     <p style={styles.subtitle}>
-                    이제는 원하는 옷을 사진으로 확인하고, 나만의 스타일을 완성하는 데 도움을 받으세요.
+                      이제는 원하는 옷을 사진으로 확인하고, 나만의 스타일을 완성하는 데 도움을 받으세요.
                     </p>
                   </div>
 
                   <div
-                    className={`animate__animated ${
-                      animateSection ? "animate__fadeInRight" : ""
-                    }`}
+                    className={`animate__animated ${animateSection ? "animate__fadeInRight" : ""
+                      }`}
                     style={{ ...styles.textContainer, top: "20%", left: "80%" }}
                   >
                     <span style={styles.yellowDot}>●</span>
                     <strong style={styles.title}>
-                    <span style={styles.pickfitFont}>PickFit</span>으로 나만의 패션을 창조하세요!
+                      <span style={styles.pickfitFont}>PickFit</span>으로 나만의 패션을 창조하세요!
                     </strong>
                     <p style={styles.subtitle}>
-                    최신 트렌드를 반영한 코디 추천으로 언제 어디서나 스타일을 한층 업그레이드할 수 있습니다.
+                      최신 트렌드를 반영한 코디 추천으로 언제 어디서나 스타일을 한층 업그레이드할 수 있습니다.
                     </p>
                   </div>
-
-
-
-
                 </div>
               </div>
             </div>
-            
           )}
-          
         />
       </div>
     </div>
   );
 };
+
+
 
 // 스타일 정의
 const styles = {

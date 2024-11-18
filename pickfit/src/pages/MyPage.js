@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom"; // useNavigate로 변경
+import { useNavigate } from "react-router-dom";
 import Header from "../components/Header";
+import "../styles/MyPage.css";
 
 const MyPage = () => {
   const [email, setEmail] = useState("");
   const [userName, setUserName] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [remainingTime, setRemainingTime] = useState("유지 중"); // 상태로 시간 관리
-
-  const navigate = useNavigate(); // useNavigate로 페이지 이동을 처리
+  const navigate = useNavigate();
 
   useEffect(() => {
     const storedEmail = localStorage.getItem("userEmail");
@@ -17,31 +16,70 @@ const MyPage = () => {
     if (storedEmail && storedUserName) {
       setEmail(storedEmail);
       setUserName(storedUserName);
-      setIsLoggedIn(true); // 이메일과 이름이 있을 경우 로그인 상태로 설정
+      setIsLoggedIn(true);
     } else {
-      setIsLoggedIn(false); // 로컬스토리지에 값이 없으면 로그인되지 않음
+      setIsLoggedIn(false);
     }
   }, []);
 
-  // 로그아웃 함수
   const handleLogout = () => {
     localStorage.clear();
-    navigate("/login"); // navigate를 사용하여 페이지 이동
+    navigate("/login");
   };
 
   return (
-    <div>
+    <div className="my-page-container">
       <Header
-        isLoggedIn={isLoggedIn} // 동적으로 로그인 상태 전달
+        isLoggedIn={isLoggedIn}
         userName={userName}
-        remainingTime={remainingTime} // 동적으로 처리된 시간 전달
-        handleLockClick={handleLogout} // 로그아웃 함수 전달
+        handleLockClick={handleLogout}
       />
-      <div style={{ padding: '20px', textAlign: 'center', marginTop: '60px' }}>
-        <h1>마이페이지</h1>
-        <p><strong>이메일:</strong> {email || "로그인된 이메일 없음"}</p> {/* 기본값 처리 */}
-        <p><strong>이름:</strong> {userName || "로그인된 이름 없음"}</p> {/* 기본값 처리 */}
+      <div className="my-page-content">
+        <div className="pickfit-text">PickFit</div>
+        <div className="profile-container">
+          <div className="profile-image-box">
+            <img src="https://via.placeholder.com/100" alt="Profile" className="profile-image" />
+          </div>
+          <div className="profile-info">
+            <p className="profile-name">{userName || "홍길동"}</p>
+            <p className="profile-email">{email || "test@naver.com"}</p>
+          </div>
+        </div>
       </div>
+
+      <div className="border-box-container">
+        <div className="border-box1">
+          <h3>내 정보 관리</h3>
+
+          <hr className="border-line" />
+          <h3>문의사항</h3>
+
+          <hr className="border-line" />
+          <h3>공지사항</h3>
+
+          <hr className="border-line" />
+          <h3>고객센터</h3>
+
+        </div>
+      </div>
+
+      <div className="border-box2">
+        <h3>이메일</h3>
+        <div className="input-box">
+          <input type="email" placeholder="이메일을 입력하세요" className="input-field" />
+        </div>
+
+        <h3>이름</h3>
+        <div className="input-box">
+          <input type="text" placeholder="이름을 입력하세요" className="input-field" />
+        </div>
+        
+        <h3>연락처</h3>
+        <div className="input-box">
+          <input type="tel" placeholder="연락처를 입력하세요" className="input-field" />
+        </div>
+      </div>
+
     </div>
   );
 };
