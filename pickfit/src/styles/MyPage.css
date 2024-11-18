@@ -1,0 +1,83 @@
+/* MyPage CSS 파일 */
+
+.my-page-container {
+    padding: 20px;
+    text-align: center;
+    margin-top: 60px;
+}
+
+.my-page-content {
+    padding: 20px;
+    text-align: center;
+    border: 1px solid #ccc;  /* 보더 추가 */
+    border-radius: 10px;       /* 둥근 모서리 */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 그림자 추가 */
+    max-width: 900px;         /* 최대 너비를 늘림 */
+    width: 100%;               /* 화면 크기에 따라 너비 조정 (최대 800px) */
+    margin: 20px auto;        /* 중앙 정렬 */
+    background-color: #343A3F; /* 배경 색상 추가 */
+    position: relative;      /* 절대 위치 설정을 위한 상대적 부모 요소 */
+}
+
+/* PickFit 텍스트 추가 */
+.pickfit-text {
+    font-size: 80px; /* 텍스트 크기 설정 */
+    font-weight: bold; /* 텍스트 굵게 */
+    color: #ffff; /* 텍스트 색상 설정 */
+    transform: rotate(-20deg); /* 기울기 20도 */
+    margin-bottom: 20px; /* 아래쪽 여백 */
+    position: absolute;  /* 절대 위치로 설정 */
+    left: 32%; /* 수평 중앙 정렬 */
+    transform: translateX(50%) rotate(-20deg); /* 오른쪽으로 조금 이동 */
+    opacity: 0.3; /* 불투명도 30%로 설정 */
+    text-shadow: 6px 6px 15px rgba(0, 0, 0, 0.8);
+}
+
+
+
+/* 프로필 컨테이너 */
+.profile-container {
+    display: flex;
+    align-items: center;
+    gap: 20px;  /* 이미지와 텍스트 사이 간격 */
+    margin-top: 20px;
+    justify-content: flex-start; /* 왼쪽 정렬 */
+}
+
+/* 프로필 이미지 박스 */
+.profile-image-box {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;  /* 둥근 프로필 이미지 */
+    overflow: hidden;    /* 이미지 넘치지 않도록 */
+    border: 2px solid #ddd; /* 테두리 추가 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* 프로필 이미지 */
+.profile-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;  /* 이미지 비율 유지 */
+}
+
+/* 프로필 정보 */
+.profile-info {
+    text-align: left;
+    color: #fff; /* 텍스트 색상을 흰색으로 설정 */
+}
+
+/* 이름 스타일 */
+.profile-name {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin: 0;
+}
+
+/* 이메일 스타일 */
+.profile-email {
+    font-size: 1rem;
+    color: #ccc; /* 이메일 색상 좀 더 밝게 설정 */
+}
