@@ -11,3 +11,19 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+/* Fullpage.js 기본 CSS */
+#fullpage-wrapper {
+  width: 100%;
+  height: 100%;
+}
+
+.section {
+  width: 100%;
+  height: 100vh; /* 각 섹션은 화면 높이를 차지 */
+  text-align: center;
+}
+
+.fp-watermark {
+  display: none !important;
+}
