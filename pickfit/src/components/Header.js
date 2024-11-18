@@ -12,59 +12,72 @@ const Header = () => {
   const navigate = useNavigate();
 
   return (
-    <header style={styles.header}>
-      <div style={styles.logoContainer}>
-        <img
-          src={mainHeaderLogo}
-          alt="Header Logo"
-          style={styles.logo}
-          onClick={() => navigate("/")}
-        />
-      </div>
+    <>
+      {/* Header */}
+      <header style={styles.header}>
+        <div style={styles.logoContainer}>
+          <img
+            src={mainHeaderLogo}
+            alt="Header Logo"
+            style={styles.logo}
+            onClick={() => navigate("/")}
+          />
+        </div>
 
-      <div style={styles.nav}>
-        <a href="#contact" style={styles.contactLink}>Contact</a>
-      </div>
+        <div style={styles.nav}>
+          <a href="#contact" style={styles.contactLink}>Contact</a>
+        </div>
 
-      <div style={styles.iconContainer}>
-        {isLoggedIn && (
-          <div style={styles.welcomeContainer}>
-            <span style={styles.welcomeMessage}>{userName}님, 환영합니다!</span>
-            <span style={styles.remainingTime}>남은 시간: {Math.floor(remainingTime / 60)}분 {remainingTime % 60}초</span>
-          </div>
-        )}
-        <img src={icon1} alt="Icon 1" style={styles.icon} />
-        <img
-          src={icon2}
-          alt={isLoggedIn ? "Logout" : "Login"}
+        <div style={styles.iconContainer}>
+          {isLoggedIn && (
+            <div style={styles.welcomeContainer}>
+              <span style={styles.welcomeMessage}>{userName}님, 환영합니다!</span>
+              <span style={styles.remainingTime}>남은 시간: {Math.floor(remainingTime / 60)}분 {remainingTime % 60}초</span>
+            </div>
+          )}
+          <img src={icon1} alt="Wishlist"
           style={styles.icon}
-          onClick={isLoggedIn ? handleLogout : () => navigate("/login")}
-        />
-        <img
-          src={icon3}
-          alt="My Page"
+          onClick={() => navigate("/wishlist")}
+          />
+          <img
+            src={icon2}
+            alt={isLoggedIn ? "Logout" : "Login"}
+            style={styles.icon}
+            onClick={isLoggedIn ? handleLogout : () => navigate("/login")}
+          />
+          <img
+            src={icon3}
+            alt="My Page"
+            style={styles.icon}
+            onClick={() => navigate("/mypage")}
+          />
+          <img src={icon4} alt="Basket"
           style={styles.icon}
-          onClick={() => navigate("/mypage")}
-        />
-        <img src={icon4} alt="Icon 4" style={styles.icon} />
-      </div>
-    </header>
+          onClick={() => navigate("/basket")}
+          />
+        </div>
+      </header>
+
+    </>
   );
 };
+
+
 
 const styles = {
   header: {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between',
-    padding: '8px 16px',
-    backgroundColor: '#333',
-    color: '#fff',
-    position: 'fixed',
-    top: 0,
-    left: 0,
-    width: '100%',
-    zIndex: 1000,
+    position: 'fixed', // 헤더 고정
+    top: 0, // 화면 상단에 고정
+    left: 0, // 화면 왼쪽 끝에 맞춤
+    right: 0, // 화면 오른쪽 끝에 맞춤
+    zIndex: 1000, // 다른 요소들 위에 표시되도록 설정
+    backgroundColor: '#333', // 배경색 설정
+    color: '#fff', // 텍스트 색상 설정
+    boxShadow: '0 4px 2px -2px gray', // 헤더에 그림자 추가 (선택사항)
+    padding: '8px 16px', // 여백 조정
   },
   logoContainer: {
     flex: 1,
@@ -73,7 +86,7 @@ const styles = {
     paddingLeft: '10px',
   },
   logo: {
-    width: '70px',
+    width: '70px', // 로고 크기 조정
     height: 'auto',
     cursor: 'pointer',
   },
@@ -117,5 +130,6 @@ const styles = {
     cursor: 'pointer',
   },
 };
+
 
 export default Header;
