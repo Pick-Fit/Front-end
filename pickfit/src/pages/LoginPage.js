@@ -31,8 +31,6 @@ const LoginPage = () => {
           alt="Main Header Logo"
           style={{ width: '150px', marginBottom: '20px' }} // 로고 스타일
         />
-        
-        {/* <h1>로그인 페이지</h1> */}
 
         {/* 로그인 버튼 */}
         <button
