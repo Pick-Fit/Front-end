@@ -4,6 +4,7 @@ import Header from "../../components/Header";
 import ProfileSection from "../Mypage/ProfileSection";
 import Sidebar from "../Mypage/Sidebar";
 import SectionContent from "../Mypage/SectionCotent";
+import VirtualTryOn from "../VirtualTryOn";
 import "../../styles/MyPage.css";
 
 const MyPage = () => {
@@ -68,9 +69,10 @@ const MyPage = () => {
         </div>
         </div>
       </div>
-      <div className="border-box3">
+      <VirtualTryOn/>
+      {/* <div className="border-box3">
         <div>Virtual Try On</div>
-      </div>
+      </div> */}
     </div>
 
   );

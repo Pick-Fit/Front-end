@@ -5,7 +5,7 @@
     text-align: center;
     margin-top: 60px;
     display: flex;
-    justify-content: space-around;
+    justify-content:space-evenly;
 
 }
 
@@ -161,19 +161,19 @@
 }
 
 .border-box3 {
-    width: 30%;
+    width: 100%;
     height: 80%;
-    padding: 20px;
+    padding: 10px;
     margin-top: 20px;
     border: 2px solid black;
     border-radius: 8px;
-    background-color: #fff;
+    background-color: #343A3F;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    text-align: center;
 }
 
 .border-box3 div {
+    display: inline-block;
     font-size: 60px;
     margin-bottom: 10px;
-    color: #343a3f;
+    color: #343A3F;
 }
