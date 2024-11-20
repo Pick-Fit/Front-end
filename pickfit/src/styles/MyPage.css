@@ -1,7 +1,16 @@
 .my-page-container {
-    padding: 20px;
+    width: 100%;
+    height: 100vh;
+    padding-top: 20px;
     text-align: center;
     margin-top: 60px;
+    display: flex;
+    justify-content: space-around;
+
+}
+
+.mypage-border-content {
+    margin: 20px;
 }
 
 .my-page-content {
@@ -11,7 +20,6 @@
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     max-width: 900px;
     width: 100%;
-    margin: 20px;
     background-color: #343A3F;
     position: relative;  /* 부모 요소가 기준이 되도록 설정 */
 }
@@ -71,35 +79,40 @@
 }
 
 .border-box-container {
+    height: 100%;
     display: flex;
-    flex-direction: column; /* 세로 방향으로 정렬 */
-    align-items: flex-start; /* 왼쪽 정렬로 변경 */
-    margin-top: 30px;
-    width: 100%; /* 전체 너비를 사용 */
+    justify-content:space-between; /* 오른쪽 정렬 */
+    align-items:flex-start; /* 세로 중앙 정렬 (옵션) */
+    margin: 10px;
 }
 
+.mypage-container {
+    width: 52%;
+    padding-left: 10px;
+}
 
 .border-box1 {
-    max-width: 600px; /* 최대 너비를 설정 */
-    width: 10%;
-    height: auto;
-    padding: 20px;
+    width: 20%;
+    max-width: 500px;
+    padding: 15px;
     border: 2px solid black;
-    border-radius: 8px;
+    border-radius: 10px;
     background-color: #fff;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    text-align: left;
-    position: absolute;  /* 절대 위치 설정 */
-    left: 30px;  /* 부모 요소 내 왼쪽 끝에 위치 */
+    text-align: center;
 }
-
 
 .border-box1 h3 {
     font-size: 1.3em;
     margin-bottom: 10px;
     color: #343a3f;
+    cursor: pointer;  /* 클릭 가능한 요소로 표시 */
 }
 
+/* 텍스트 클릭 시 두껍게 변경 */
+.border-box1 h3:active {
+    font-weight: bold;  /* 클릭 시 글씨 두께 증가 */
+}
 
 .border-line1 {
     border: none;
@@ -108,18 +121,18 @@
 }
 
 .border-box2 {
-    max-width: 600px;
-    width: 50%;
-    padding: 20px;
+    width: 40%;
+    max-width: 500px;
+    padding: 15px;
     border: 2px solid black;
-    border-radius: 8px;
+    border-radius: 10px;
     background-color: #fff;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: left;
+}
+
+.maintenance-section {
     text-align: center;
-    position: absolute; /* 부모 요소를 기준으로 절대 위치 */
-    right: 0; /* 오른쪽 끝에 맞춤 */
-    margin-right: 950px; /* 원하는 거리만큼 이동 */
-    text-align: left; /* 텍스트를 왼쪽 정렬 */
 }
 
 .border-box2 h3 {
@@ -132,21 +145,35 @@
     font-size: 1em;
     color: #555;
 }
+
 .input-box {
     margin-top: 10px;
     margin-bottom: 20px;
-  }
-  
-  .input-field {
+}
+
+.input-field {
     width: 90%; /* 입력 창 너비를 박스 내부에 맞춤 */
     padding: 10px; /* 여백 추가 */
     border: 1px solid #ccc; /* 입력 창 테두리 */
     border-radius: 5px; /* 모서리를 둥글게 */
     font-size: 1rem; /* 텍스트 크기 */
     outline: none; /* 포커스 시 기본 테두리 제거 */
-  }
-  
-  .input-field:focus {
-    border-color: black; /* 포커스 시 테두리 색 변경 */
-    box-shadow: 0 0 5px rgba(33, 150, 243, 0.5); /* 포커스 시 효과 */
-  }
+}
+
+.border-box3 {
+    width: 30%;
+    height: 80%;
+    padding: 20px;
+    margin-top: 20px;
+    border: 2px solid black;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.border-box3 div {
+    font-size: 60px;
+    margin-bottom: 10px;
+    color: #343a3f;
+}
