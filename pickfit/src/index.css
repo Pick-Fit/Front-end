@@ -1,16 +1,20 @@
 /* 기본 body 스타일 */
+@font-face {
+  font-family: 'BMEULJIRO';
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.0/BMEULJIRO.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* 영어와 한국어 폰트를 각각 다르게 설정 */
 body {
   margin: 0;
-  font-family: 'Racing Sans One', sans-serif; /* 영어와 한국어 폰트 설정 */
+  font-family: 'Racing Sans One', 'BMEULJIRO', sans-serif; /* 영어는 Racing Sans One, 한글은 BMEULJIRO */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* 한글 폰트 설정 */
-body:lang(ko) {
-  font-family:'Racing Sans One', sans-serif;
-}
-
+/* 코드 폰트 */
 code {
   font-family: 'Racing Sans One', sans-serif;
 }
