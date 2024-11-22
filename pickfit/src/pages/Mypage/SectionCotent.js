@@ -1,8 +1,28 @@
-// SectionContent.js
+import React, { useState } from 'react';
 import "../../styles/MyPage.css";
 import MaintenanceSection from "./MaintenanceSection";
 
 const SectionContent = ({ activeSection, email, userName, setEmail, setUserName }) => {
+  const [contactNumber, setContactNumber] = useState(''); // 연락처 상태 관리
+
+  const handleSave = (e) => {
+    let value = e.target.value;
+
+    // 숫자와 '-'만 허용하고, 그 외 문자는 제거
+    value = value.replace(/[^0-9-]/g, '');
+
+    // 3자리-4자리-4자리로 포맷팅
+    if (value.length <= 3) {
+      value = value.replace(/(\d{3})(\d{0,})/, '$1$2');  // 3자리까지만 입력
+    } else if (value.length <= 7) {
+      value = value.replace(/(\d{3})(\d{4})(\d{0,})/, '$1-$2$3');  // 3자리-4자리
+    } else {
+      value = value.replace(/(\d{3})(\d{4})(\d{4})/, '$1-$2-$3');  // 3자리-4자리-4자리
+    }
+    
+    setContactNumber(value); // 상태 업데이트
+  };
+
   if (activeSection === "info") {
     return (
       <div>
@@ -30,9 +50,14 @@ const SectionContent = ({ activeSection, email, userName, setEmail, setUserName 
         <div className="input-box">
           <input
             type="tel"
+            value={contactNumber}
+            onChange={handleSave}
             placeholder="연락처를 입력하세요"
             className="input-field"
           />
+        </div>
+        <div className="Storage" onClick={handleSave}>
+          <div>저장</div>
         </div>
       </div>
     );

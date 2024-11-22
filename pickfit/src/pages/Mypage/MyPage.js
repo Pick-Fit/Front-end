@@ -12,7 +12,7 @@ const MyPage = () => {
   const [email, setEmail] = useState("");
   const [userName, setUserName] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [activeSection, setActiveSection] = useState("info"); // 활성화된 항목 상태 관리
+  const [activeSection, setActiveSection] = useState("info");
   const navigate = useNavigate();
   const API_URL = "http://localhost:8080/api/user"; // API URL 상수화
 
@@ -41,7 +41,7 @@ const MyPage = () => {
   };
 
   const handleSectionClick = (section) => {
-    setActiveSection(section); // 클릭한 항목을 활성화
+    setActiveSection(section);
   };
 
   return (
@@ -78,9 +78,6 @@ const MyPage = () => {
         </div>
       </div>
       <VirtualTryOn/>
-      {/* <div className="border-box3">
-        <div>Virtual Try On</div>
-      </div> */}
     </div>
 
   );
