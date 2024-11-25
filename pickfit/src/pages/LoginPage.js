@@ -1,7 +1,6 @@
 import React from "react";
 import googleIcon from "../images/google.png"; // 구글 아이콘 이미지
 import mainHeaderLogo from "../images/main_header_logo.png"; // 로고 이미지 경로
-import Header from "../components/Header"; // 헤더 컴포넌트 임포트
 
 const LoginPage = () => {
   const handleGoogleLogin = () => {
