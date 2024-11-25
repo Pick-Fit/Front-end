@@ -34,6 +34,7 @@ const SectionContent = ({ activeSection, email, userName, setEmail, setUserName 
             onChange={(e) => setEmail(e.target.value)} // 이메일 입력값 상태 변경
             placeholder="이메일을 입력하세요"
             className="input-field"
+            readOnly
           />
         </div>
         <h3>이름</h3>
@@ -44,6 +45,7 @@ const SectionContent = ({ activeSection, email, userName, setEmail, setUserName 
             onChange={(e) => setUserName(e.target.value)} // 이름 입력값 상태 변경
             placeholder="이름을 입력하세요"
             className="input-field"
+            readOnly
           />
         </div>
         <h3>연락처</h3>

@@ -37,6 +37,12 @@ const Header = () => {
       setRemainingTime((prevTime) => Math.max(prevTime - 1, 0)); // 시간 감소
     }, 1000);
 
+    const formatTime = (seconds) => {
+      const minutes = Math.floor(seconds / 60);
+      const remainingSeconds = seconds % 60;
+      return `${minutes}분 ${remainingSeconds}초`;
+    };
+
     return () => clearInterval(interval); // 컴포넌트 언마운트 시 인터벌 정리
   }, []);
 

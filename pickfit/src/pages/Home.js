@@ -5,6 +5,7 @@ import ReactFullpage from "@fullpage/react-fullpage";
 import mainLogo from "../images/main_logo.png"; // 첫 번째 영역 로고
 import mainSecondLogo from "../images/main_second_logo.png"; // 두 번째 영역 로고
 import "animate.css";
+import axios from "axios";
 
 const Home = () => {
   const [searchParams] = useSearchParams();
@@ -13,6 +14,7 @@ const Home = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [remainingTime, setRemainingTime] = useState(0);
   const [animateSection, setAnimateSection] = useState(false); // 애니메이션 상태
+  const [isModalOpen, setIsModalOpen] = useState(false); // 모달창 상태 관리
 
 
 
@@ -105,13 +107,48 @@ const Home = () => {
     };
   }, []);
 
+  
+
+  
   const handleLockClick = () => {
-    localStorage.clear();
-    setIsLoggedIn(false);
-    setUserName("");
-    setRemainingTime(0);
-    navigate("/login");
+    setIsModalOpen(true); // 모달창 열기
   };
+
+  const handleLogoutConfirm = async () => {
+    try {
+      const response = await axios.post(
+        "http://localhost:8080/api/logout",
+        {},
+        {
+          withCredentials: true,
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      console.log("Logout response:", response.data);
+  
+      // 상태 초기화
+      setIsLoggedIn(false);
+      setUserName("");
+      setRemainingTime(0);
+  
+      // 로그인 페이지로 이동
+      navigate("/login");
+    } catch (error) {
+      console.error("Logout failed:", error.response ? error.response.data : error.message);
+    } finally {
+      setIsModalOpen(false); // 모달창 닫기
+    }
+  };
+  
+  const handleLogoutCancel = () => {
+    setIsModalOpen(false); // 모달창 닫기
+  };
+
+
+
+  
 
   return (
     <div>
@@ -121,6 +158,19 @@ const Home = () => {
         remainingTime={formatTime(remainingTime)}
         handleLockClick={handleLockClick}
       />
+      {isModalOpen && (
+  <div style={modalStyles.overlay}>
+    <div style={modalStyles.modal}>
+      <p>정말 로그아웃 하시겠습니까?</p>
+      <button onClick={handleLogoutConfirm} style={modalStyles.button}>
+        로그아웃
+      </button>
+      <button onClick={handleLogoutCancel} style={modalStyles.button}>
+        취소
+      </button>
+    </div>
+  </div>
+)}
       <div style={{ marginTop: "60px" }}>
         <ReactFullpage
           scrollingSpeed={1000}
@@ -241,6 +291,34 @@ const Home = () => {
 };
 
 
+
+const modalStyles = {
+  overlay: {
+    position: "fixed",
+    top: 0,
+    left: 0,
+    width: "100vw",
+    height: "100vh",
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    zIndex: 1000,
+  },
+  modal: {
+    backgroundColor: "black",
+    padding: "20px",
+    borderRadius: "5px",
+    textAlign: "center",
+    
+  },
+
+  button: {
+    margin: "10px",
+    padding: "10px 20px",
+    fontSize: "16px",
+  },
+};
 
 // 스타일 정의
 const styles = {
