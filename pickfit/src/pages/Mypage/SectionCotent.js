@@ -5,22 +5,16 @@ import MaintenanceSection from "./MaintenanceSection";
 const SectionContent = ({ activeSection, email, userName, setEmail, setUserName }) => {
   const [contactNumber, setContactNumber] = useState(''); // 연락처 상태 관리
 
-  const handleSave = (e) => {
-    let value = e.target.value;
+  const handleNameChange = (e) => {
+    const newName = e.target.value;
+    setUserName(newName);
+    console.log("변경된 이름:", newName); // 이름 변경 확인
+  };
 
-    // 숫자와 '-'만 허용하고, 그 외 문자는 제거
-    value = value.replace(/[^0-9-]/g, '');
-
-    // 3자리-4자리-4자리로 포맷팅
-    if (value.length <= 3) {
-      value = value.replace(/(\d{3})(\d{0,})/, '$1$2');  // 3자리까지만 입력
-    } else if (value.length <= 7) {
-      value = value.replace(/(\d{3})(\d{4})(\d{0,})/, '$1-$2$3');  // 3자리-4자리
-    } else {
-      value = value.replace(/(\d{3})(\d{4})(\d{4})/, '$1-$2-$3');  // 3자리-4자리-4자리
-    }
-    
-    setContactNumber(value); // 상태 업데이트
+  const handleContactChange = (e) => {
+    const newContact = e.target.value;
+    setContactNumber(newContact);
+    console.log("변경된 연락처:", newContact); // 연락처 변경 확인
   };
 
   if (activeSection === "info") {
@@ -31,10 +25,9 @@ const SectionContent = ({ activeSection, email, userName, setEmail, setUserName 
           <input
             type="email"
             value={email}
-            onChange={(e) => setEmail(e.target.value)} // 이메일 입력값 상태 변경
+            readOnly // 이메일 필드를 비활성화
             placeholder="이메일을 입력하세요"
-            className="input-field"
-            readOnly
+            className="input-field input-disabled" // 추가 클래스명
           />
         </div>
         <h3>이름</h3>
@@ -42,7 +35,7 @@ const SectionContent = ({ activeSection, email, userName, setEmail, setUserName 
           <input
             type="text"
             value={userName}
-            onChange={(e) => setUserName(e.target.value)} // 이름 입력값 상태 변경
+            onChange={handleNameChange} // 이름 변경 핸들러 연결변경
             placeholder="이름을 입력하세요"
             className="input-field"
             readOnly
@@ -53,12 +46,12 @@ const SectionContent = ({ activeSection, email, userName, setEmail, setUserName 
           <input
             type="tel"
             value={contactNumber}
-            onChange={handleSave}
+            onChange={handleContactChange} // 이름 변경 핸들러 연결
             placeholder="연락처를 입력하세요"
             className="input-field"
           />
         </div>
-        <div className="Storage" onClick={handleSave}>
+        <div className="Storage">
           <div>저장</div>
         </div>
       </div>

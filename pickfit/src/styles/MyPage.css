@@ -181,3 +181,17 @@
     margin-bottom: 10px;
     color: #343A3F;
 }
+
+.input-disabled {
+    background-color: #f0f0f0; /* 비활성화된 느낌의 배경색 */
+    cursor: not-allowed; /* 비활성화 커서 표시 */
+  }
+  
+  .input-disabled:hover {
+    border: 1px solid #d0d0d0; /* 호버 시 약간의 강조 효과 */
+    background-color: #e0e0e0; /* 호버 시 배경색 약간 어둡게 */
+  }
+
+.Storage {
+    text-align: right; /* 저장 버튼을 오른쪽으로 정렬 */
+  }

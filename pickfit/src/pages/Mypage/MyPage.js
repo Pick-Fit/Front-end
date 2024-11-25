@@ -12,7 +12,6 @@ const MyPage = () => {
   const [email, setEmail] = useState("");
   const [userName, setUserName] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(true);
-  const [activeSection, setActiveSection] = useState("info"); // 활성화된 항목 상태 관리
   const [activeSection, setActiveSection] = useState("info");
   const navigate = useNavigate();
   const API_URL = "http://localhost:8080/api/user"; // API URL 상수화
@@ -55,9 +54,11 @@ const MyPage = () => {
 
   return (
     <div className="my-page-container">
-      
-        
-      
+      <Header
+        isLoggedIn={isLoggedIn}
+        userName={userName}
+        handleLockClick={handleLogout}
+      />
       <div className="mypage-container">
         <div className="mypage-border-content">
         <div className="my-page-content">
