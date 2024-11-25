@@ -152,12 +152,6 @@ const Home = () => {
 
   return (
     <div>
-      <Header
-        isLoggedIn={isLoggedIn}
-        userName={userName}
-        remainingTime={formatTime(remainingTime)}
-        handleLockClick={handleLockClick}
-      />
       {isModalOpen && (
   <div style={modalStyles.overlay}>
     <div style={modalStyles.modal}>
