@@ -11,8 +11,6 @@ const LoginPage = () => {
 
   return (
     <div>
-      {/* 헤더 */}
-      <Header />
 
       {/* 로그인 페이지 컨텐츠 */}
       <div
