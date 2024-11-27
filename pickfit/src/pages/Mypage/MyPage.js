@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Header from "../../components/Header";
 import ProfileSection from "../Mypage/ProfileSection";
 import Sidebar from "../Mypage/Sidebar";
 import SectionContent from "../Mypage/SectionCotent";
@@ -11,6 +10,7 @@ import axios from "axios";
 const MyPage = () => {
   const [email, setEmail] = useState("");
   const [userName, setUserName] = useState("");
+  const [phoneNum, setPhoneNum] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(true);
   const [activeSection, setActiveSection] = useState("info");
   const navigate = useNavigate();
@@ -24,9 +24,10 @@ const MyPage = () => {
     const fetchUserData = async () => {
       try {
         const response = await axios.get(API_URL, { withCredentials: true });
-        const { email, name } = response.data; // API에서 이메일과 이름 가져오기
+        const { email, name, phoneNum } = response.data; // API에서 이메일과 이름 가져오기
         setEmail(email);
         setUserName(name);
+        setPhoneNum(phoneNum);
         setIsLoggedIn(true);
       } catch (error) {
         console.error("Failed to fetch user data:", error.response || error.message);
@@ -54,11 +55,7 @@ const MyPage = () => {
 
   return (
     <div className="my-page-container">
-      <Header
-        isLoggedIn={isLoggedIn}
-        userName={userName}
-        handleLockClick={handleLogout}
-      />
+      
       <div className="mypage-container">
         <div className="mypage-border-content">
         <div className="my-page-content">
@@ -78,8 +75,10 @@ const MyPage = () => {
               activeSection={activeSection}
               email={email}
               userName={userName}
+              phoneNum={phoneNum}
               setEmail={setEmail}
               setUserName={setUserName}
+              setPhoneNum={setPhoneNum}
             />
           </div>
         </div>
