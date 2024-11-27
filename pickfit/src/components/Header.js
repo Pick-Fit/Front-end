@@ -5,11 +5,14 @@ import axios from "axios";
 import LoginModal from "../modal/LoginModal";
 import LogoutModal from "../modal/LogoutModal";
 
-import mainHeaderLogo from '../images/main_header_logo.png';
-import icon1 from '../images/wishlist.png';
-import icon2 from '../images/lock.png';
-import icon3 from '../images/myPage.png';
-import icon4 from '../images/basket.png';
+import mainHeaderLogo from "../images/main_header_logo.png";
+import Wishlist from "../images/wishlist.png";
+import Lock from "../images/lock.png";
+import MyPage from "../images/myPage.png";
+import Basket from "../images/basket.png";
+import TryMeOn from "../images/tryMeOn.png";
+import TopBar from "../images/topBar.png";
+import Close from "../images/close.png";
 
 const Header = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -17,6 +20,7 @@ const Header = () => {
   const [remainingTime, setRemainingTime] = useState(3600); // 초기 세션 시간 (1시간)
   const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false); // 로그아웃 모달 상태
   const [isLoginPromptModalOpen, setIsLoginPromptModalOpen] = useState(false); // 로그인 프롬프트 모달 상태
+  const [isTopBarPopupOpen, setIsTopBarPopupOpen] = useState(false); // TopBar 팝업 상태
   const navigate = useNavigate();
 
   const API_URL = "http://localhost:8080/api/user"; // API URL 상수화
@@ -49,12 +53,16 @@ const Header = () => {
 
   const handleLogoutConfirm = () => {
     axios
-      .post("http://localhost:8080/api/logout", {}, {
-        withCredentials: true,
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
+      .post(
+        "http://localhost:8080/api/logout",
+        {},
+        {
+          withCredentials: true,
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
       .then(() => {
         setIsLoggedIn(false);
         setUserName("");
@@ -74,16 +82,25 @@ const Header = () => {
   };
 
   const handleMyPageClick = () => {
-    if (!isLoggedIn) {
-      setIsLoginPromptModalOpen(true); // 로그인 프롬프트 모달 열기
-    } else {
-      navigate("/mypage"); // 로그인되어 있으면 마이페이지로 이동
-    }
+            // if (!isLoggedIn) {
+    //   setIsLoginPromptModalOpen(true); // 로그인 프롬프트 모달 열기
+    // } else {
+    //   navigate("/mypage"); // 로그인되어 있으면 마이페이지로 이동
+    // }
+    navigate("/mypage");
   };
 
   const handleLoginPromptConfirm = () => {
     setIsLoginPromptModalOpen(false); // 모달 닫기
     navigate("/login"); // 로그인 페이지로 이동
+  };
+
+  const openTopBarPopup = () => {
+    setIsTopBarPopupOpen(true);
+  };
+
+  const closeTopBarPopup = () => {
+    setIsTopBarPopupOpen(false);
   };
 
   return (
@@ -98,28 +115,86 @@ const Header = () => {
       </div>
 
       <div style={styles.nav}>
-        <a href="#contact" style={styles.contactLink}>Contact</a>
+        <a href="#contact" style={styles.contactLink}>
+          Contact
+        </a>
       </div>
 
       <div style={styles.iconContainer}>
         {isLoggedIn ? (
           <div style={styles.welcomeContainer}>
             <span style={styles.welcomeMessage}>{userName}님, 환영합니다!</span>
-            <span style={styles.remainingTime}>남은 시간: {Math.floor(remainingTime / 60)}분 {remainingTime % 60}초</span>
+            <span style={styles.remainingTime}>
+              남은 시간: {Math.floor(remainingTime / 60)}분 {remainingTime % 60}초
+            </span>
           </div>
         ) : (
           <span style={styles.welcomeMessage}>로그인이 필요합니다.</span>
         )}
-        <img src={icon1} alt="Wishlist" style={styles.icon} onClick={() => navigate("/wishlist")} />
         <img
-          src={icon2}
+          src={Wishlist}
+          alt="Wishlist"
+          style={styles.icon}
+          onClick={() => navigate("/wishlist")}
+        />
+        <img
+          src={Lock}
           alt={isLoggedIn ? "Logout" : "Login"}
           style={styles.icon}
           onClick={isLoggedIn ? handleLogoutClick : () => navigate("/login")}
         />
-        <img src={icon3} alt="My Page" style={styles.icon} onClick={handleMyPageClick} />
-        <img src={icon4} alt="Basket" style={styles.icon} onClick={() => navigate("/basket")} />
+        <img
+          src={MyPage}
+          alt="MyPage"
+          style={styles.icon}
+          onClick={handleMyPageClick}
+        />
+        <img
+          src={Basket}
+          alt="Basket"
+          style={styles.icon}
+          onClick={() => navigate("/basket")}
+        />
+        <img
+          src={TryMeOn}
+          alt="TryMeOn"
+          style={styles.icon}
+          onClick={() => navigate("/tryMeOn")}
+        />
+        <img
+          src={TopBar}
+          alt="TopBar"
+          style={styles.icon}
+          onClick={openTopBarPopup}
+        />
       </div>
+
+      {isTopBarPopupOpen && (
+        <div style={modalStyles.overlay}>
+          <div style={modalStyles.modal}>
+            <img
+              src={Close}
+              alt="Close"
+              style={styles.closeIcon}
+              onClick={closeTopBarPopup}
+            />
+            <nav style={styles.topBarNav}>
+              <a href="#home" style={styles.topBarLink}>
+                Home
+              </a>
+              <a href="#about" style={styles.topBarLink}>
+                About
+              </a>
+              <a href="#services" style={styles.topBarLink}>
+                Services
+              </a>
+              <a href="#contact" style={styles.topBarLink}>
+                Contact
+              </a>
+            </nav>
+          </div>
+        </div>
+      )}
 
       <LogoutModal
         isOpen={isLogoutModalOpen}
@@ -134,6 +209,7 @@ const Header = () => {
     </header>
   );
 };
+
 
 
 const styles = {
@@ -155,7 +231,7 @@ const styles = {
     flex: 1,
     display: 'flex',
     justifyContent: 'flex-start',
-    paddingLeft: '10px',
+    paddingLeft: '5px',
   },
   logo: {
     width: '70px',
@@ -179,8 +255,6 @@ const styles = {
     justifyContent: 'flex-end',
     alignItems: 'center',
     gap: '10px',
-    paddingRight: '10px',
-    marginRight: '20px',
   },
   welcomeContainer: {
     display: 'flex',
@@ -197,16 +271,34 @@ const styles = {
     fontSize: '12px',
   },
   icon: {
-    width: '20px',
-    height: '20px',
+    width: '25px',
+    height: '25px',
     cursor: 'pointer',
+  },
+  topBarNav: {
+    display: "flex",
+    flexDirection: "column",
+    gap: "10px",
+  },
+  topBarLink: {
+    textDecoration: "none",
+    color: "#333",
+    fontSize: "18px",
+  },
+  closeIcon: {
+    width: "20px",
+    height: "20px",
+    position: "absolute",
+    top: "10px",
+    right: "10px",
+    cursor: "pointer",
   },
 };
 
 const modalStyles = {
   overlay: {
     position: "fixed",
-    top: 0,
+    top: '85px',
     left: 0,
     width: "100vw",
     height: "100vh",
