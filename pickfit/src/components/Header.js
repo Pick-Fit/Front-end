@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
+import TopBarPopup from "./TopBar"; // TopBarPopup 컴포넌트 임포트
 import LoginModal from "../modal/LoginModal";
 import LogoutModal from "../modal/LogoutModal";
 
@@ -12,7 +13,6 @@ import MyPage from "../images/myPage.png";
 import Basket from "../images/basket.png";
 import TryMeOn from "../images/tryMeOn.png";
 import TopBar from "../images/topBar.png";
-import Close from "../images/close.png";
 
 const Header = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -82,25 +82,20 @@ const Header = () => {
   };
 
   const handleMyPageClick = () => {
-            // if (!isLoggedIn) {
-    //   setIsLoginPromptModalOpen(true); // 로그인 프롬프트 모달 열기
-    // } else {
-    //   navigate("/mypage"); // 로그인되어 있으면 마이페이지로 이동
-    // }
-    navigate("/mypage");
+    navigate("/myPage");
   };
 
   const handleLoginPromptConfirm = () => {
-    setIsLoginPromptModalOpen(false); // 모달 닫기
-    navigate("/login"); // 로그인 페이지로 이동
+    setIsLoginPromptModalOpen(false);
+    navigate("/login");
   };
 
   const openTopBarPopup = () => {
-    setIsTopBarPopupOpen(true);
+    setIsTopBarPopupOpen(true); // 팝업 열기
   };
 
   const closeTopBarPopup = () => {
-    setIsTopBarPopupOpen(false);
+    setIsTopBarPopupOpen(false); // 팝업 닫기
   };
 
   return (
@@ -170,30 +165,7 @@ const Header = () => {
       </div>
 
       {isTopBarPopupOpen && (
-        <div style={modalStyles.overlay}>
-          <div style={modalStyles.modal}>
-            <img
-              src={Close}
-              alt="Close"
-              style={styles.closeIcon}
-              onClick={closeTopBarPopup}
-            />
-            <nav style={styles.topBarNav}>
-              <a href="#home" style={styles.topBarLink}>
-                Home
-              </a>
-              <a href="#about" style={styles.topBarLink}>
-                About
-              </a>
-              <a href="#services" style={styles.topBarLink}>
-                Services
-              </a>
-              <a href="#contact" style={styles.topBarLink}>
-                Contact
-              </a>
-            </nav>
-          </div>
-        </div>
+        <TopBarPopup isOpen={isTopBarPopupOpen} onClose={closeTopBarPopup} />
       )}
 
       <LogoutModal
@@ -209,8 +181,6 @@ const Header = () => {
     </header>
   );
 };
-
-
 
 const styles = {
   header: {
@@ -255,6 +225,8 @@ const styles = {
     justifyContent: 'flex-end',
     alignItems: 'center',
     gap: '10px',
+    paddingRight: '10px',
+    marginRight: '20px',
   },
   welcomeContainer: {
     display: 'flex',
@@ -274,51 +246,6 @@ const styles = {
     width: '25px',
     height: '25px',
     cursor: 'pointer',
-  },
-  topBarNav: {
-    display: "flex",
-    flexDirection: "column",
-    gap: "10px",
-  },
-  topBarLink: {
-    textDecoration: "none",
-    color: "#333",
-    fontSize: "18px",
-  },
-  closeIcon: {
-    width: "20px",
-    height: "20px",
-    position: "absolute",
-    top: "10px",
-    right: "10px",
-    cursor: "pointer",
-  },
-};
-
-const modalStyles = {
-  overlay: {
-    position: "fixed",
-    top: '85px',
-    left: 0,
-    width: "100vw",
-    height: "100vh",
-    backgroundColor: "rgba(0, 0, 0, 0.5)",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    zIndex: 1000,
-  },
-  modal: {
-    backgroundColor: "white",
-    padding: "20px",
-    borderRadius: "5px",
-    textAlign: "center",
-    color: "black"
-  },
-  button: {
-    margin: "10px",
-    padding: "10px 20px",
-    fontSize: "16px",
   },
 };
 
