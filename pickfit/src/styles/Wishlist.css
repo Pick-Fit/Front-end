@@ -63,3 +63,19 @@
     line-height: 1.5; /* 문구 간격 */
     text-align: center; /* 텍스트 중앙 정렬 */
   }
+
+  /* src/styles/Wishlist.css 또는 Product.css에 추가 */
+@keyframes slideOutRight {
+  0% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+
+.product-gallery .image-box.removing {
+  animation: slideOutRight 0.3s forwards;
+}
