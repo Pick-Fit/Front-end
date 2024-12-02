@@ -2,7 +2,8 @@
 import React, { Suspense, lazy, useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import { AuthProvider } from "./contexts/AuthContext";
-import Header from "./components/Header";
+import { WishlistProvider } from "./contexts/WishlistContext"; // WishlistProvider import 추가
+import Header from "./components/Header/Header";
 import LoadingScreen from "./components/LoadingScreen";
 
 const Home = lazy(() => import("./pages/Home"));
@@ -32,17 +33,19 @@ function App() {
 
   return (
     <AuthProvider>
-      <Header />
-      <Suspense fallback={<LoadingScreen />}>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/mypage" element={<MyPage />} />
-          <Route path="/wishlist" element={<WishlistPage />} />
-          <Route path="/basket" element={<Basket />} />
-          <Route path="/trymeon" element={<TryMeOn />} />
-        </Routes>
-      </Suspense>
+      <WishlistProvider> {/* WishlistProvider 추가 */}
+        <Header />
+        <Suspense fallback={<LoadingScreen />}>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/mypage" element={<MyPage />} />
+            <Route path="/wishlist" element={<WishlistPage />} />
+            <Route path="/basket" element={<Basket />} />
+            <Route path="/trymeon" element={<TryMeOn />} />
+          </Routes>
+        </Suspense>
+      </WishlistProvider> {/* WishlistProvider 닫기 */}
     </AuthProvider>
   );
 }
