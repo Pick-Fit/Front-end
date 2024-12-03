@@ -38,27 +38,77 @@
   height: 30%; /* 하단 박스 높이 */
   background-color: #ffffff; /* 하단 박스 배경색 */
   padding: 10px;
-  display: flex; /* 버튼과 텍스트를 가로 배치 */
-  justify-content: space-between; /* 양 끝에 요소 배치 */
-  align-items: center;
+  display: flex;
+  flex-direction: row; /* 버튼들을 가로로 정렬 */
+  justify-content: space-between; /* 버튼 간 간격을 양쪽 끝으로 */
+  align-items: center; /* 텍스트와 버튼을 세로 중앙 정렬 */
   box-sizing: border-box; /* 패딩 포함 */
+}
+
+.tryon-button:hover,
+.buy-button:hover {
+  background-color: #444444; /* 호버 시 살짝 밝아짐 */
+}
+
+/* 구매하러 가기 버튼 */
+.buy-button {
+  background-color: #f44336; /* 빨간색 배경 */
+  width: 120px; /* 버튼 크기 조정 */
+  text-align: center;
+}
+
+.tryon-button,
+.buy-button {
+  background-color: #000000; /* 검정색 배경 */
+  color: #ffffff; /* 흰색 텍스트 */
+  border: none;
+  border-radius: 8px;
+  padding: 8px 16px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-bottom: 10px; /* 버튼 간 세로 간격 추가 */
 }
 
 .image-info {
   display: flex;
   flex-direction: column; /* 제목과 가격을 세로로 정렬 */
+  align-items: flex-start; /* 텍스트는 왼쪽에 정렬 */
 }
-
 .image-title {
   font-size: 20px;
   font-weight: bold;
   color: #333;
   margin-bottom: 10px;
 }
-
 .image-price {
   font-size: 16px;
   color: #555;
+}
+
+.tryon-button,
+.buy-button {
+  background-color: #000000; /* 검정색 배경 */
+  color: #ffffff; /* 흰색 텍스트 */
+  border: none;
+  border-radius: 8px;
+  padding: 8px 16px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-left: 10px; /* 버튼 사이의 간격 추가 */
+}
+
+.tryon-button:hover,
+.buy-button:hover {
+  background-color: #444444; /* 호버 시 살짝 밝아짐 */
+}
+
+/* 구매하러 가기 버튼 */
+.buy-button {
+  background-color: #f44336; /* 빨간색 배경 */
+  width: 120px; /* 버튼 크기 조정 */
+  text-align: center;
 }
 
 .tryon-button {
@@ -84,6 +134,7 @@
   cursor: pointer;
   transition: transform 0.3s ease, opacity 0.3s ease;
 }
+
 
 .wishlist-icon img {
   width: 30px;

@@ -21,7 +21,6 @@ const Product = ({ images, onRemove, removingItems = [] }) => {
     } else {
       // 다른 페이지에서는 위시리스트 토글 기능
       const isInWishlist = false; // 실제 구현에서는 wishlist.some()으로 체크
-      
       if (isInWishlist) {
         removeFromWishlist(image.id);
       } else {
@@ -56,6 +55,8 @@ const Product = ({ images, onRemove, removingItems = [] }) => {
               <span className="image-price">{image.price}</span>
             </div>
             <button className="tryon-button">Try On</button>
+            {/* 추가된 구매하러 가기 버튼 */}
+            <button className="buy-button">구매하러 가기</button>
           </div>
           <div
             className={`wishlist-icon ${clickedIcons[image.id] ? 'clicked' : ''}`}

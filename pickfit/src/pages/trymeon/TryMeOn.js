@@ -22,25 +22,26 @@ const TryMeOn = () => {
 
   const [activeTab, setActiveTab] = useState('productCatalog');
   const [currentPage, setCurrentPage] = useState(1);
-  const [selectedCategory, setSelectedCategory] = useState(null);
-
-  const totalPages = Math.ceil(allImages.length / itemsPerPage);
+  const [selectedSubcategory, setSelectedSubcategory] = useState(null);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   const handleTabChange = (tab) => {
     setActiveTab(tab);
+    setIsSidebarOpen(tab === 'productCatalog');
   };
 
   const handlePageChange = (page) => {
     setCurrentPage(page);
   };
 
-  const handleCategorySelect = (category) => {
-    setSelectedCategory(category); 
-    setCurrentPage(1); 
+  const handleCategorySelect = (subcategory) => {
+    setSelectedSubcategory(subcategory); 
+    setCurrentPage(1);
+    setIsSidebarOpen(false);
   };
 
-  const filteredImages = selectedCategory
-    ? allImages.filter((item) => item.category === selectedCategory)
+  const filteredImages = selectedSubcategory
+    ? allImages.filter((item) => item.category === selectedSubcategory)
     : allImages;
 
   const startIndex = (currentPage - 1) * itemsPerPage;
@@ -48,20 +49,23 @@ const TryMeOn = () => {
 
   return (
     <div className="try-me-on-container">
-      {activeTab === 'virtualTryOn' && (
-        <SlideSidebar
-          isOpen={true}
-          onClose={() => setActiveTab('productCatalog')}
-          onCategorySelect={handleCategorySelect} 
-        />
-      )}
-
       {activeTab === 'productCatalog' && (
         <div className="main-content">
-          <TabNavigation activeTab={activeTab} onTabChange={handleTabChange} />
+          <TabNavigation 
+            activeTab={activeTab} 
+            onTabChange={handleTabChange} 
+          />
 
-          <div className="product-container">
-            <Product images={visibleImages} />
+          <div className="category-filter-section">
+            <SlideSidebar
+              isOpen={isSidebarOpen}
+              onClose={() => setIsSidebarOpen(false)}
+              onCategorySelect={handleCategorySelect || (() => {})}
+            />
+
+            <div className="product-container">
+              <Product images={visibleImages} />
+            </div>
           </div>
 
           <Pagination
