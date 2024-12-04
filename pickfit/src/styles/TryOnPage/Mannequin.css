@@ -1,0 +1,24 @@
+  /* 마네킹 컨테이너 */
+  .mannequin-container{
+    width: 80%; /* 내부 컨텐츠 크기 */
+    height: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.05);
+    border: 2px dashed lightgray;
+  }
+  
+
+  .tryon-top-left {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1; /* 두 영역이 동일한 크기를 차지하도록 설정 */
+    height: 50%; /* 높이를 50%로 줄이기 (원하는 크기만큼 조정 가능) */
+    min-width: 300px;
+  }
+
+  .tryon-top-left {
+    border-right: 2px solid white;
+  }

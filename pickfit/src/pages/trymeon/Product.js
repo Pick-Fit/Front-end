@@ -1,34 +1,27 @@
 // src/components/Product.js
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useTryOn } from '../../contexts/TryOnContext';
 import '../../styles/trymeon/Product.css';
 import wishlistIcon from '../../images/wishlist_rad.png';
-import { useWishlist } from '../../contexts/WishlistContext'; // 위시리스트 컨텍스트 import
 
 const Product = ({ images, onRemove, removingItems = [] }) => {
   const [clickedIcons, setClickedIcons] = useState({});
-  const { addToWishlist, removeFromWishlist } = useWishlist();
+  const { setImageForTryOn } = useTryOn(); // Access the TryOn context
+
+  const navigate = useNavigate();
+
+  const handleTryOnClick = (image) => {
+    setImageForTryOn(image); // Set the selected image for "Try On"
+    navigate('/tryon'); // Navigate to the TryOn page
+  };
 
   const handleWishlistClick = (image, event) => {
-    // 개별 아이콘에 대한 클릭 상태 토글
     setClickedIcons(prev => ({
       ...prev,
       [image.id]: true
     }));
-    
-    // onRemove prop이 있다면 (위시리스트 페이지에서) 해당 함수 실행
-    if (onRemove) {
-      onRemove(image.id);
-    } else {
-      // 다른 페이지에서는 위시리스트 토글 기능
-      const isInWishlist = false; // 실제 구현에서는 wishlist.some()으로 체크
-      if (isInWishlist) {
-        removeFromWishlist(image.id);
-      } else {
-        addToWishlist(image);
-      }
-    }
 
-    // 일정 시간 후 클릭 상태 초기화
     setTimeout(() => {
       setClickedIcons(prev => ({
         ...prev,
@@ -54,7 +47,9 @@ const Product = ({ images, onRemove, removingItems = [] }) => {
               <span className="image-title">{image.name}</span>
               <span className="image-price">{image.price}</span>
             </div>
-            <button className="tryon-button">Try On</button>
+            <button className="tryon-button" onClick={() => handleTryOnClick(image)}>
+              Try On
+            </button>
           </div>
           <div
             className={`wishlist-icon ${clickedIcons[image.id] ? 'clicked' : ''}`}
