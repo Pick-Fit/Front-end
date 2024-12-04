@@ -10,7 +10,6 @@ const Home = lazy(() => import("./pages/Home"));
 const LoginPage = lazy(() => import("./pages/LoginPage"));
 const MyPage = lazy(() => import("./pages/Mypage/MyPage"));
 const WishlistPage = lazy(() => import("./pages/Wishist"));
-const Basket = lazy(() => import("./pages/Basket"));
 const TryMeOn = lazy(() => import("./pages/trymeon/TryMeOn"));
 // const Spinner = lazy(() => import("./components/Spinner"));
 
@@ -41,7 +40,6 @@ function App() {
             <Route path="/login" element={<LoginPage />} />
             <Route path="/mypage" element={<MyPage />} />
             <Route path="/wishlist" element={<WishlistPage />} />
-            <Route path="/basket" element={<Basket />} />
             <Route path="/trymeon" element={<TryMeOn />} />
           </Routes>
         </Suspense>

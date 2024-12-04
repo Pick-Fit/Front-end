@@ -16,12 +16,13 @@ const Header = () => {
   const [isLoginPromptModalOpen, setIsLoginPromptModalOpen] = useState(false);
   const navigate = useNavigate();
 
-  const API_URL = "http://localhost:8080/api/user";
+  // 환경 변수로 API URL을 가져옵니다.
+  const API_URL = process.env.REACT_APP_API_URL;
 
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const response = await axios.get(API_URL, { withCredentials: true });
+        const response = await axios.get(`${API_URL}/api/user`, { withCredentials: true });
         const { name } = response.data;
         setUserName(name);
         setIsLoggedIn(true);
@@ -38,7 +39,7 @@ const Header = () => {
     }, 1000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [API_URL]);
 
   const handleLogoutClick = () => {
     setIsLogoutModalOpen(true);
@@ -46,7 +47,7 @@ const Header = () => {
 
   const handleLogoutConfirm = () => {
     axios
-      .post("http://localhost:8080/api/logout", {}, { withCredentials: true })
+      .post(`${API_URL}/api/logout`, {}, { withCredentials: true })
       .then(() => {
         setIsLoggedIn(false);
         setUserName("");
@@ -79,7 +80,6 @@ const Header = () => {
         navigate={navigate}
         onLogoutClick={handleLogoutClick}
       />
-
 
       <LogoutModal
         isOpen={isLogoutModalOpen}

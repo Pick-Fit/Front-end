@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import Wishlist from "../../images/wishlist.png";
 import Lock from "../../images/lock.png";
 import MyPage from "../../images/myPage.png";
-import Basket from "../../images/basket.png";
 import TryMeOn from "../../images/tryMeOn.png";
 import TopBar from "../../images/topBar.png";
 import SlideSidebar from "../SlideSidebar"; // 슬라이드 사이드바 컴포넌트 추가
@@ -34,12 +33,6 @@ const HeaderIcons = ({ isLoggedIn, navigate, onLogoutClick }) => {
           alt="MyPage"
           style={styles.icon}
           onClick={() => navigate("/myPage")}
-        />
-        <img
-          src={Basket}
-          alt="Basket"
-          style={styles.icon}
-          onClick={() => navigate("/basket")}
         />
         <img
           src={TryMeOn}
