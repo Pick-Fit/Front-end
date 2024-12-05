@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import ProfileSection from "../Mypage/ProfileSection";
 import Sidebar from "../Mypage/Sidebar";
 import SectionContent from "../Mypage/SectionCotent";
-import VirtualTryOn from "../VirtualTryOn";
 import "../../styles/MyPage.css";
 import axios from "axios";
 
@@ -84,7 +83,6 @@ const MyPage = () => {
         </div>
         </div>
       </div>
-      <VirtualTryOn/>
     </div>
 
   );

@@ -7,6 +7,13 @@ import '../styles/Pagination.css';
 const Pagination = ({ totalPages, onPageChange }) => {
   const [currentPage, setCurrentPage] = useState(1);
 
+  // 한 구간에 표시할 페이지 수
+  const pagesPerRange = 10;
+
+  // 현재 구간을 계산
+  const currentRangeStart = Math.floor((currentPage - 1) / pagesPerRange) * pagesPerRange + 1;
+  const currentRangeEnd = Math.min(currentRangeStart + pagesPerRange - 1, totalPages);
+
   const handleNextPage = () => {
     if (currentPage < totalPages) {
       const nextPage = currentPage + 1;
@@ -38,14 +45,12 @@ const Pagination = ({ totalPages, onPageChange }) => {
         <img src={LeftArrowIcon} alt="Previous" className="pagination-icon" />
       </button>
       <div className="pagination-numbers">
-        {Array.from({ length: totalPages }, (_, index) => {
-          const pageNumber = index + 1;
+        {Array.from({ length: currentRangeEnd - currentRangeStart + 1 }, (_, index) => {
+          const pageNumber = currentRangeStart + index;
           return (
             <button
               key={pageNumber}
-              className={`pagination-number ${
-                currentPage === pageNumber ? 'active' : ''
-              }`}
+              className={`pagination-number ${currentPage === pageNumber ? 'active' : ''}`}
               onClick={() => handlePageClick(pageNumber)}
             >
               {pageNumber}
@@ -70,4 +75,3 @@ Pagination.propTypes = {
 };
 
 export default Pagination;
-  

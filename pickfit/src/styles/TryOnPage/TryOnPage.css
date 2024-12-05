@@ -9,16 +9,18 @@
 
 .tryon-top {
   display: flex;
-  flex: 1; /* 상단 영역의 높이를 전체 높이의 1/3로 줄이기 */
   flex-wrap: wrap;
+  height: 1000px; /* 높이를 300픽셀로 고정 */
 }
+
+
 
 .tryon-top-left, .tryon-top-right {
   display: flex;
   justify-content: center;
   align-items: center;
-  flex: 1; /* 두 영역이 동일한 크기를 차지하도록 설정 */
-  height: 50%; /* 높이를 50%로 줄이기 (원하는 크기만큼 조정 가능) */
+  flex: 2; /* 두 영역이 동일한 크기를 차지하도록 설정 */
+  height: 100%; /* 높이를 50%로 줄이기 (원하는 크기만큼 조정 가능) */
   min-width: 300px;
 }
 
@@ -26,14 +28,20 @@
   border-right: 2px solid white;
 }
 
-.mannequin-container, .user-tryon-container {
+.mannequin-container{
   width: 80%; /* 내부 컨텐츠 크기 */
   height: 80%;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgba(0, 0, 0, 0.05);
   border: 2px dashed lightgray;
+}
+.user-tryon-container {
+  width: 80%; /* 내부 컨텐츠 크기 */
+  height: 80%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .tryon-bottom {
