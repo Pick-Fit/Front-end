@@ -1,11 +1,13 @@
 .product-container {
   flex: 1; /* 가로 배치된 영역 중 하나 */
   padding: 20px;
+  position: relative; /* Ensure that products are rendered normally */
+  z-index: 1; /* Products should be below CategoryFilter */
 }
 
 .product-gallery {
   display: grid; /* 그리드 레이아웃 */
-  grid-template-columns: repeat(4, 1fr); /* 한 줄에 4개 */
+  grid-template-columns: repeat(5, 1fr); /* 한 줄에 4개 */
   gap: 20px; /* 이미지 박스 간 간격 */
   justify-content: center; /* 가로 중앙 정렬 */
   padding: 10px;
@@ -45,20 +47,11 @@
   box-sizing: border-box; /* 패딩 포함 */
 }
 
-.tryon-button:hover,
-.buy-button:hover {
+.tryon-button:hover{
   background-color: #444444; /* 호버 시 살짝 밝아짐 */
 }
 
-/* 구매하러 가기 버튼 */
-.buy-button {
-  background-color: #f44336; /* 빨간색 배경 */
-  width: 120px; /* 버튼 크기 조정 */
-  text-align: center;
-}
-
-.tryon-button,
-.buy-button {
+.tryon-button{
   background-color: #000000; /* 검정색 배경 */
   color: #ffffff; /* 흰색 텍스트 */
   border: none;
@@ -86,8 +79,7 @@
   color: #555;
 }
 
-.tryon-button,
-.buy-button {
+.tryon-button{
   background-color: #000000; /* 검정색 배경 */
   color: #ffffff; /* 흰색 텍스트 */
   border: none;
@@ -99,16 +91,8 @@
   margin-left: 10px; /* 버튼 사이의 간격 추가 */
 }
 
-.tryon-button:hover,
-.buy-button:hover {
+.tryon-button:hover {
   background-color: #444444; /* 호버 시 살짝 밝아짐 */
-}
-
-/* 구매하러 가기 버튼 */
-.buy-button {
-  background-color: #f44336; /* 빨간색 배경 */
-  width: 120px; /* 버튼 크기 조정 */
-  text-align: center;
 }
 
 .tryon-button {

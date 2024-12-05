@@ -1,18 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
 import Wishlist from "../../images/wishlist.png";
 import Lock from "../../images/lock.png";
 import MyPage from "../../images/myPage.png";
-import Basket from "../../images/basket.png";
 import TryMeOn from "../../images/tryMeOn.png";
-import TopBar from "../../images/topBar.png";
-import SlideSidebar from "../SlideSidebar"; // 슬라이드 사이드바 컴포넌트 추가
 
 const HeaderIcons = ({ isLoggedIn, navigate, onLogoutClick }) => {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
-  const toggleSidebar = () => {
-    setIsSidebarOpen((prevState) => !prevState);
-  };
+
 
   return (
     <>
@@ -36,27 +30,12 @@ const HeaderIcons = ({ isLoggedIn, navigate, onLogoutClick }) => {
           onClick={() => navigate("/myPage")}
         />
         <img
-          src={Basket}
-          alt="Basket"
-          style={styles.icon}
-          onClick={() => navigate("/basket")}
-        />
-        <img
           src={TryMeOn}
           alt="TryMeOn"
           style={styles.icon}
           onClick={() => navigate("/tryMeOn")}
         />
-        <img
-          src={TopBar}
-          alt="TopBar"
-          style={styles.icon}
-          onClick={toggleSidebar} // 슬라이드 사이드바 열기/닫기
-        />
       </div>
-
-      {/* 슬라이드 사이드바 */}
-      <SlideSidebar isOpen={isSidebarOpen} onClose={toggleSidebar} />
     </>
   );
 };

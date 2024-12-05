@@ -1,0 +1,128 @@
+/* tryon-page와 관련된 스타일 유지 */
+.tryon-page {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100vh; /* 전체 높이 */
+  padding-top: 120px;
+}
+
+.tryon-top {
+  display: flex;
+  flex-wrap: wrap;
+  height: 1000px; /* 높이를 300픽셀로 고정 */
+}
+
+
+
+.tryon-top-left, .tryon-top-right {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 2; /* 두 영역이 동일한 크기를 차지하도록 설정 */
+  height: 100%; /* 높이를 50%로 줄이기 (원하는 크기만큼 조정 가능) */
+  min-width: 300px;
+}
+
+.tryon-top-left {
+  border-right: 2px solid white;
+}
+
+.mannequin-container{
+  width: 80%; /* 내부 컨텐츠 크기 */
+  height: 80%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px dashed lightgray;
+}
+.user-tryon-container {
+  width: 80%; /* 내부 컨텐츠 크기 */
+  height: 80%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.tryon-bottom {
+  display: flex;
+  flex: 1; /* 하단 영역이 여전히 전체 높이의 1/3 차지 */
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(to top, darkgray, gray);
+  color: white;
+}
+
+.recommendation-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 90%;
+  height: 70%;
+}
+
+/* test_body와 관련된 스타일 추가 */
+.test_body {
+  background-color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+img {
+  height: 150px;
+  width: 150px;
+}
+
+.container {
+  width: 200px;
+  height: 250px;
+  position: relative;
+  transform-style: preserve-3d;
+  transform: perspective(1000px); /* perspective 값을 줄여 시선이 낮고 가까운 느낌을 주도록 */
+  animation: gallery 20s linear infinite;
+  cursor: pointer;
+}
+
+.container span {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  /* 각도를 5개 이미지에 맞게 변경 */
+  transform: rotateY(calc(var(--i) * 72deg)) translateZ(300px); /* translateZ 값을 줄여 이미지 간의 거리를 좁힘 */
+}
+
+.container span img {
+  position: absolute;
+  border-radius: 10px;
+  border: 6px ridge #ccc;
+}
+
+@keyframes gallery {
+  0% {
+    transform: perspective(800px) rotateY(0deg);
+  }
+  100% {
+    transform: perspective(800px) rotateY(360deg);
+  }
+}
+
+/* 반응형 디자인 추가 */
+@media (max-width: 768px) {
+  .tryon-top {
+    flex-direction: column; /* 화면이 좁을 경우 세로 배치 */
+  }
+
+  .tryon-top-left, .tryon-top-right {
+    width: 100%; /* 세로로 쌓이도록 */
+    min-width: 0; /* 최소 너비 제한 해제 */
+    border-right: none;
+    height: auto; /* 세로로 배치할 경우 높이를 자동으로 맞추도록 설정 */
+  }
+
+  .tryon-bottom {
+    flex: 1; /* 하단 영역이 여전히 차지 */
+  }
+}

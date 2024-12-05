@@ -1,8 +1,9 @@
 // src/App.js
-import React, { Suspense, lazy, useState, useEffect } from "react";
+import React, { Suspense, lazy } from "react";
 import { Routes, Route } from "react-router-dom";
 import { AuthProvider } from "./contexts/AuthContext";
 import { WishlistProvider } from "./contexts/WishlistContext"; // WishlistProvider import 추가
+import { TryOnProvider } from './contexts/TryOnContext';
 import Header from "./components/Header/Header";
 import LoadingScreen from "./components/LoadingScreen";
 
@@ -10,8 +11,8 @@ const Home = lazy(() => import("./pages/Home"));
 const LoginPage = lazy(() => import("./pages/LoginPage"));
 const MyPage = lazy(() => import("./pages/Mypage/MyPage"));
 const WishlistPage = lazy(() => import("./pages/Wishist"));
-const Basket = lazy(() => import("./pages/Basket"));
 const TryMeOn = lazy(() => import("./pages/trymeon/TryMeOn"));
+const TryOnPage = lazy(() => import("./pages/TryOnPage/TryOnPage"));
 // const Spinner = lazy(() => import("./components/Spinner"));
 
 function App() {
@@ -32,21 +33,23 @@ function App() {
   // }
 
   return (
-    <AuthProvider>
-      <WishlistProvider> {/* WishlistProvider 추가 */}
-        <Header />
-        <Suspense fallback={<LoadingScreen />}>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="/mypage" element={<MyPage />} />
-            <Route path="/wishlist" element={<WishlistPage />} />
-            <Route path="/basket" element={<Basket />} />
-            <Route path="/trymeon" element={<TryMeOn />} />
-          </Routes>
-        </Suspense>
-      </WishlistProvider> {/* WishlistProvider 닫기 */}
-    </AuthProvider>
+    <TryOnProvider>
+      <AuthProvider>
+        <WishlistProvider> {/* WishlistProvider 추가 */}
+          <Header />
+          <Suspense fallback={<LoadingScreen />}>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/login" element={<LoginPage />} />
+              <Route path="/mypage" element={<MyPage />} />
+              <Route path="/wishlist" element={<WishlistPage />} />
+              <Route path="/trymeon" element={<TryMeOn />} />
+              <Route path="/tryon" element={<TryOnPage />} />
+            </Routes>
+          </Suspense>
+        </WishlistProvider> {/* WishlistProvider 닫기 */}
+      </AuthProvider>
+    </TryOnProvider>
   );
 }
 
