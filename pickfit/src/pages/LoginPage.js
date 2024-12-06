@@ -2,10 +2,12 @@ import React from "react";
 import googleIcon from "../images/google.png"; // 구글 아이콘 이미지
 import mainHeaderLogo from "../images/main_header_logo.png"; // 로고 이미지 경로
 
+const googleOAuthUrl = process.env.REACT_APP_GOOGLE_OAUTH_URL;
+
 const LoginPage = () => {
   const handleGoogleLogin = () => {
     // Home.js에서 사용했던 URL과 동일하게 설정
-    window.location.href = "http://localhost:8080/oauth2/authorization/google?redirect_uri=http://localhost:3000&mode=login";
+    window.location.href = googleOAuthUrl;
   };
 
   return (

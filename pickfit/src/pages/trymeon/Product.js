@@ -7,6 +7,8 @@ import '../../styles/trymeon/Product.css';
 import wishlistRed from '../../images/wishlist_rad.png';
 import whishlistBlack from '../../images/wishlist_black.png';
 
+const API_URL = process.env.REACT_APP_API_URL;
+
 const Product = ({ images, onRemove, removingItems = [] }) => {
   const [clickedIcons, setClickedIcons] = useState({});
   const { setImageForTryOn } = useTryOn();
@@ -35,7 +37,7 @@ const Product = ({ images, onRemove, removingItems = [] }) => {
           productId: image.id,
         };
 
-        const response = await axios.post('http://localhost:8080/api/wishlist', dataToSend, {
+        const response = await axios.post(`${API_URL}/api/wishlist`, dataToSend, {
           headers: {
             'Content-Type': 'application/json',
           },

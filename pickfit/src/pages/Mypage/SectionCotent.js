@@ -16,7 +16,7 @@ const SectionContent = ({
   const [address, setAddress] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
-  const API_URL = "http://localhost:8080/api/update";
+  const API_URL = process.env.REACT_APP_API_URL;
 
   // 초기값 설정
   useEffect(() => {
@@ -81,7 +81,7 @@ const SectionContent = ({
 
   const handleSave = async () => {
     try {
-      const response = await fetch(API_URL, {
+      const response = await fetch(`${API_URL}/api/update`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
