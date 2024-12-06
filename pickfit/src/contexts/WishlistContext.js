@@ -9,13 +9,13 @@ export const WishlistProvider = ({ children }) => {
     return savedWishlist ? JSON.parse(savedWishlist) : [];
   });
 
-  const addToWishlist = (product) => {
+  const addToWishlist = (product, item) => {
     // 중복 체크 (id로 확인)
     const isAlreadyInWishlist = wishlist.some(item => item.id === product.id);
     
     if (!isAlreadyInWishlist) {
       const updatedWishlist = [...wishlist, product];
-      setWishlist(updatedWishlist);
+      setWishlist((prev) => [...prev, { ...item, wishlistStatus: 'wishlistRed' }]);
       localStorage.setItem('wishlist', JSON.stringify(updatedWishlist));
     }
   };

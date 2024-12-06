@@ -1,4 +1,3 @@
-// src/pages/WishlistPage.js
 import React, { useState } from 'react';
 import "../styles/Wishlist.css";
 import wishlistIcon from '../images/wishlist2.png';
@@ -7,8 +6,8 @@ import Product from '../pages/trymeon/Product'; // 기존 Product 컴포넌트 i
 
 function WishlistPage() {
   const { wishlist, removeFromWishlist, clearWishlist } = useWishlist();
-  // 제거 중인 아이템의 ID를 추적하는 상태 추가
   const [removingItems, setRemovingItems] = useState([]);
+  const [clickedIcons, setClickedIcons] = useState({});
 
   // 개별 위시리스트 항목 삭제 핸들러 추가
   const handleRemoveWishlistItem = (imageId) => {
@@ -21,6 +20,14 @@ function WishlistPage() {
       // 제거 완료 후 removingItems에서 해당 ID 제거
       setRemovingItems(prev => prev.filter(id => id !== imageId));
     }, 300); // CSS 애니메이션 지속 시간과 일치
+  };
+
+  // 위시리스트 아이템 클릭 상태 토글 처리
+  const handleWishlistIconClick = (image) => {
+    setClickedIcons(prev => ({
+      ...prev,
+      [image.id]: !prev[image.id], // 상태 반전
+    }));
   };
 
   return (
@@ -52,6 +59,8 @@ function WishlistPage() {
               images={wishlist} 
               onRemove={handleRemoveWishlistItem}
               removingItems={removingItems} // 제거 중인 아이템 정보 전달
+              clickedIcons={clickedIcons} // 클릭 상태 전달
+              onWishlistIconClick={handleWishlistIconClick} // 클릭 상태 토글 핸들러 전달
             />
           </div>
         )}

@@ -23,7 +23,16 @@ const Header = () => {
     const fetchUserData = async () => {
       try {
         const response = await axios.get(`${API_URL}/api/user`, { withCredentials: true });
-        const { name } = response.data;
+        
+        // 받은 데이터 콘솔 로그로 출력
+        console.log("Received user data:", response.data);
+  
+        // response.data에서 email을 localStorage에 저장
+        const { name, email } = response.data;
+        localStorage.setItem('userEmail', email);  // 이메일을 localStorage에 저장
+        localStorage.setItem('userName', name);
+
+  
         setUserName(name);
         setIsLoggedIn(true);
       } catch (error) {
@@ -31,15 +40,17 @@ const Header = () => {
         setIsLoggedIn(false);
       }
     };
-
+  
     fetchUserData();
-
+  
     const interval = setInterval(() => {
       setRemainingTime((prevTime) => Math.max(prevTime - 1, 0));
     }, 1000);
-
+  
     return () => clearInterval(interval);
   }, [API_URL]);
+  
+  
 
   const handleLogoutClick = () => {
     setIsLogoutModalOpen(true);
