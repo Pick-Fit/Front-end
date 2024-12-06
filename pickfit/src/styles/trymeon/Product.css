@@ -46,11 +46,6 @@
   align-items: center; /* 텍스트와 버튼을 세로 중앙 정렬 */
   box-sizing: border-box; /* 패딩 포함 */
 }
-
-.tryon-button:hover{
-  background-color: #444444; /* 호버 시 살짝 밝아짐 */
-}
-
 .tryon-button{
   background-color: #000000; /* 검정색 배경 */
   color: #ffffff; /* 흰색 텍스트 */
@@ -78,34 +73,6 @@
   font-size: 16px;
   color: #555;
 }
-
-.tryon-button{
-  background-color: #000000; /* 검정색 배경 */
-  color: #ffffff; /* 흰색 텍스트 */
-  border: none;
-  border-radius: 8px;
-  padding: 8px 16px;
-  font-size: 14px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  margin-left: 10px; /* 버튼 사이의 간격 추가 */
-}
-
-.tryon-button:hover {
-  background-color: #444444; /* 호버 시 살짝 밝아짐 */
-}
-
-.tryon-button {
-  background-color: #000000; /* 검정색 배경 */
-  color: #ffffff; /* 흰색 텍스트 */
-  border: none;
-  border-radius: 8px;
-  padding: 8px 16px;
-  font-size: 14px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
 .tryon-button:hover {
   background-color: #444444; /* 호버 시 살짝 밝아짐 */
 }
@@ -129,4 +96,50 @@
 .wishlist-icon.clicked {
   transform: scale(1.2); /* 클릭 시 확대 효과 */
   opacity: 0.8; /* 클릭 시 살짝 투명해짐 */
+}
+
+/* 기존 스타일 */
+
+/* 코디 추천 텍스트와 원 */
+.recommendation-tag {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+}
+
+.circle {
+  width: 50px;
+  height: 50px;
+  background-color: #9a00ff;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.recommendation-text {
+  color: white;
+  font-weight: bold;
+  display: flex;
+  flex-direction: column; /* 세로 방향으로 나열 */
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s ease;
+  font-size: 14px;
+}
+
+.recommendation-part {
+  margin: 0;
+  font-size: 14px; /* 각 문단의 글자 크기 조정 */
+}
+
+/* 호버 시 텍스트 변경: 각 이미지별로 호버 상태를 관리 */
+.circle:hover .recommendation-text {
+  content: 'click!';
+}
+
+.recommendation-part:hover {
+  cursor: pointer;
+  text-decoration: underline; /* 호버 시 밑줄 추가 */
 }
