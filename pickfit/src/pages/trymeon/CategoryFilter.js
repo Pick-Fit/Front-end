@@ -1,11 +1,6 @@
 import React from 'react';
 import '../../styles/trymeon/CategoryFilter.css';
 
-const subcategories = {
-  남자: ['패딩', '자켓', '코트', '니트웨어', '티셔츠/맨투맨', '셔츠', '아우터', '바지/데님', '블레이저/수트'],
-  여자: ['패딩', '코트', '자켓', '니트웨어', '티셔츠/맨투맨', '블라우스/셔츠', '아우터', '블레이저/수트', '바지/데님', '원피스/점프수트'],
-};
-
 const removeExtension = (subcategory) => {
   return subcategory.replace('.json', '');
 };
