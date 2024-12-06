@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
-import Header from "../components/Header/Header";
 import ReactFullpage from "@fullpage/react-fullpage";
 import mainLogo from "../images/main_logo.png"; // 첫 번째 영역 로고
 import mainSecondLogo from "../images/main_second_logo.png"; // 두 번째 영역 로고

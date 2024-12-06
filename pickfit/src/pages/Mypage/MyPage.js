@@ -87,10 +87,6 @@ const MyPage = () => {
           </div>
         </div>
       </div>
-<<<<<<< HEAD
-      <VirtualTryOn />
-=======
->>>>>>> main
     </div>
   );
 };

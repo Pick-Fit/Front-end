@@ -19,13 +19,14 @@ const styles = {
     flex: 1,
     display: "flex",
     justifyContent: "flex-start",
-    paddingLeft: "5px",
   },
   logo: {
     width: "70px",
     height: "auto",
     cursor: "pointer",
+    borderRadius: "25%", // 둥글게 깎음
   },
 };
+
 
 export default HeaderLogo;
