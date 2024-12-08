@@ -1,67 +1,56 @@
-import React, { useState } from 'react';
-import "../styles/Wishlist.css";
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import '../styles/Wishlist.css';
 import wishlistIcon from '../images/wishlist2.png';
-import { useWishlist } from '../contexts/WishlistContext';
-import Product from '../pages/trymeon/Product'; // 기존 Product 컴포넌트 import
+
+const API_URL = process.env.REACT_APP_API_URL;
 
 function WishlistPage() {
-  const { wishlist, removeFromWishlist, clearWishlist } = useWishlist();
-  const [removingItems, setRemovingItems] = useState([]);
-  const [clickedIcons, setClickedIcons] = useState({});
+  const [wishlistItems, setWishlistItems] = useState([]); // 위시리스트 상태
 
-  // 개별 위시리스트 항목 삭제 핸들러 추가
-  const handleRemoveWishlistItem = (imageId) => {
-    // 제거 애니메이션을 위해 removingItems에 추가
-    setRemovingItems(prev => [...prev, imageId]);
+  useEffect(() => {
+    const fetchWishlist = async () => {
+      try {
+        const userEmail = localStorage.getItem('userEmail');
+        if (userEmail) {
+          const response = await axios.get(`${API_URL}/api/wishlist/${userEmail}`);
+          const data = response?.data?.data || [];
+          setWishlistItems(data);
+        }
+      } catch (error) {
+        console.error('Failed to fetch wishlist items:', error.message);
+      }
+    };
 
-    // 애니메이션 지속 시간 후 실제 아이템 제거
-    setTimeout(() => {
-      removeFromWishlist(imageId);
-      // 제거 완료 후 removingItems에서 해당 ID 제거
-      setRemovingItems(prev => prev.filter(id => id !== imageId));
-    }, 300); // CSS 애니메이션 지속 시간과 일치
-  };
-
-  // 위시리스트 아이템 클릭 상태 토글 처리
-  const handleWishlistIconClick = (image) => {
-    setClickedIcons(prev => ({
-      ...prev,
-      [image.id]: !prev[image.id], // 상태 반전
-    }));
-  };
+    fetchWishlist();
+  }, []);
 
   return (
     <div className="page-container">
       <div className="header">
         <h1>Wishlist</h1>
-        {wishlist.length > 0 && (
-          <button 
-            className="clear-wishlist-button"
-            onClick={clearWishlist}
-          >
-            전체 삭제
-          </button>
-        )}
       </div>
       <div className="divider"></div>
       <div className="body">
-        {wishlist.length === 0 ? (
+        {wishlistItems.length === 0 ? (
           <div className="icon-with-text">
             <img className="icon" src={wishlistIcon} alt="Wishlist Icon" />
             <p className="no-items-text">
-              WishList에 등록된 상품이 없습니다. <br /> 
-              Pick,Fit에서 다양한 상품들을 등록해보세요.
+              Wishlist에 등록된 상품이 없습니다. <br />
+              Pick, Fit에서 다양한 상품들을 등록해보세요.
             </p>
           </div>
         ) : (
           <div className="wishlist-products">
-            <Product 
-              images={wishlist} 
-              onRemove={handleRemoveWishlistItem}
-              removingItems={removingItems} // 제거 중인 아이템 정보 전달
-              clickedIcons={clickedIcons} // 클릭 상태 전달
-              onWishlistIconClick={handleWishlistIconClick} // 클릭 상태 토글 핸들러 전달
-            />
+            {wishlistItems.map((item) => (
+              <div key={item.productId} className="wishlist-item">
+                <img src={item.imageUrl} alt={item.title} className="wishlist-image" />
+                <div className="wishlist-details">
+                  <p className="wishlist-title">{item.title}</p>
+                  <p className="wishlist-price">{item.price} 원</p>
+                </div>
+              </div>
+            ))}
           </div>
         )}
       </div>

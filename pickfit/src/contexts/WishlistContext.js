@@ -1,54 +1,40 @@
-// src/contexts/WishlistContext.js
-import React, { createContext, useState, useContext } from 'react';
+import React, { createContext, useState, useEffect } from 'react';
+import axios from 'axios';
 
-const WishlistContext = createContext();
+const API_URL = process.env.REACT_APP_API_URL;
 
+// 컨텍스트 생성
+export const WishlistContext = createContext();
+
+// 컨텍스트 프로바이더
 export const WishlistProvider = ({ children }) => {
-  const [wishlist, setWishlist] = useState(() => {
-    const savedWishlist = localStorage.getItem('wishlist');
-    return savedWishlist ? JSON.parse(savedWishlist) : [];
-  });
+  const [wishlist, setWishlist] = useState([]);
+  const [user, setUser] = useState({ email: '' });
 
-  const addToWishlist = (product, item) => {
-    // 중복 체크 (id로 확인)
-    const isAlreadyInWishlist = wishlist.some(item => item.id === product.id);
-    
-    if (!isAlreadyInWishlist) {
-      const updatedWishlist = [...wishlist, product];
-      setWishlist((prev) => [...prev, { ...item, wishlistStatus: 'wishlistRed' }]);
-      localStorage.setItem('wishlist', JSON.stringify(updatedWishlist));
+  useEffect(() => {
+    const email = localStorage.getItem('userEmail');
+    if (email) {
+      setUser({ email });
+    }
+  }, []);
+
+  const loadWishlist = async () => {
+    try {
+      if (!user.email) {
+        console.error('User email not found');
+        return;
+      }
+
+      const response = await axios.get(`${API_URL}/api/wishlist/${user.email}`);
+      setWishlist(response.data);
+    } catch (error) {
+      console.error('Failed to load wishlist', error.message);
     }
   };
 
-  const removeFromWishlist = (productId) => {
-    const updatedWishlist = wishlist.filter(item => item.id !== productId);
-    setWishlist(updatedWishlist);
-    localStorage.setItem('wishlist', JSON.stringify(updatedWishlist));
-  };
-
-  const clearWishlist = () => {
-    setWishlist([]);
-    localStorage.removeItem('wishlist');
-  };
-
   return (
-    <WishlistContext.Provider 
-      value={{ 
-        wishlist, 
-        addToWishlist, 
-        removeFromWishlist, 
-        clearWishlist 
-      }}
-    >
+    <WishlistContext.Provider value={{ wishlist, loadWishlist, user }}>
       {children}
     </WishlistContext.Provider>
   );
-};
-
-export const useWishlist = () => {
-  const context = useContext(WishlistContext);
-  if (!context) {
-    throw new Error('useWishlist는 WishlistProvider 내에서 사용해야 합니다.');
-  }
-  return context;
 };

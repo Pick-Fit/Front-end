@@ -2,117 +2,165 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTryOn } from '../../contexts/TryOnContext';
 import axios from 'axios';
-import { useWishlist } from '../../contexts/WishlistContext';
 import '../../styles/trymeon/Product.css';
 import wishlistRed from '../../images/wishlist_rad.png';
 import whishlistBlack from '../../images/wishlist_black.png';
-import RecommendationPopup from './RecommendationPopup'; // 팝업 컴포넌트 임포트
+import RecommendationPopup from './RecommendationPopup';
 
 const API_URL = process.env.REACT_APP_API_URL;
 
-const Product = ({ images = [], onRemove, removingItems = [] }) => {
+const Product = ({ images = [], removingItems = [] }) => {
+  const [isLoading, setIsLoading] = useState(false);
   const [clickedIcons, setClickedIcons] = useState({});
-  const [showPopup, setShowPopup] = useState(false); // 팝업 상태 추가
-  const [hoveredImage, setHoveredImage] = useState(null); // 호버 상태를 이미지별로 관리
+  const [showPopup, setShowPopup] = useState(false);
+  const [hoveredImage, setHoveredImage] = useState(null);
   const { setImageForTryOn } = useTryOn();
-  const { addToWishlist } = useWishlist();
   const navigate = useNavigate();
-  const [recommendedProducts, setRecommendedProducts] = useState([]); // 추천된 상품들 저장
+  const [recommendedProducts, setRecommendedProducts] = useState([]);
+  const [user, setUser] = useState({ email: '', name: '' });
+  const [wishlist, setWishlist] = useState([]);
+
+  useEffect(() => {
+    // 사용자 정보 로드
+    const storedEmail = localStorage.getItem('userEmail');
+    const storedName = localStorage.getItem('userName');
+    setUser({
+      email: storedEmail || '',
+      name: storedName || '',
+    });
+  }, []);
+
+  // Fetch initial wishlist from server
+  useEffect(() => {
+    const fetchWishlist = async () => {
+      try {
+        const response = await axios.get(`${API_URL}/api/wishlist/${user.email}`);
+        const wishlistData = response.data?.data || [];
+        setWishlist(wishlistData);
+
+        const iconsState = wishlistData.reduce((acc, item) => {
+          acc[item.productId] = true;
+          return acc;
+        }, {});
+        setClickedIcons(iconsState);
+      } catch (error) {
+        console.error("Failed to fetch wishlist:", error.message);
+      }
+    };
+
+    if (user.email) {
+      fetchWishlist();
+    }
+  }, [user.email]);
 
   const handleTryOnClick = (image) => {
     setImageForTryOn(image);
     navigate('/tryon');
   };
 
-  const handleWishlistClick = async (image) => {
-    const isCurrentlyRed = clickedIcons[image.id] || false; // 현재 상태 확인
-    
-    // 상태 토글
-    setClickedIcons((prev) => ({
-      ...prev,
-      [image.id]: !isCurrentlyRed, // 현재 상태의 반대로 변경
-    }));
+  const handlePopupOpen = (imageId) => {
+    const randomRecommended = images.filter(image => image.id !== imageId)
+      .sort(() => 0.5 - Math.random())
+      .slice(0, 4);
+    setRecommendedProducts(randomRecommended);
+    setShowPopup(true);
+  };
+
+  const handleWishlistClick = async (e, image) => {
+    e.stopPropagation();
+    console.log("📌 위시리스트 아이콘 클릭됨");
+    console.log("🔍 로딩 상태 확인 (이벤트 시작):", isLoading);
   
-    if (!isCurrentlyRed) {
-      // wishlistRed로 변환되는 경우 서버에 추가 요청
-      try {
-        const userEmail = localStorage.getItem('userEmail');
-        const userName = localStorage.getItem('userName');
-        
-        const dataToSend = {
+    if (isLoading) {
+      console.log("⏳ 로딩 중입니다. 중복 클릭 방지.");
+      return;
+    }
+    
+    setIsLoading(true);
+    console.log("🚀 로딩 상태를 true로 설정");
+  
+    try {
+      const isCurrentlyRed = clickedIcons[image.id] || false; 
+      console.log("🔴 현재 빨간 상태 확인:", isCurrentlyRed);
+  
+      if (isCurrentlyRed) {
+        console.log("🗑️ DELETE 요청을 보냅니다...");
+        const response = await axios.delete(
+          `${API_URL}/user/products/${image.id}`,
+          { data: { userEmail: user.email } } // Request body에 이메일 전달
+        );
+  
+        console.log("✅ DELETE 요청 응답:", response);
+  
+        setClickedIcons(prev => {
+          console.log("🔄 상태 삭제 전:", prev);
+          const updatedIcons = { ...prev };
+          delete updatedIcons[image.id];
+          console.log("🛑 삭제 후 상태:", updatedIcons);
+          return updatedIcons;
+        });
+  
+        setWishlist(prev => {
+          console.log("🔄 삭제 전 상태 확인:", prev);
+          const newWishlist = prev.filter(item => item.productId !== image.id);
+          console.log("✅ 삭제 후 위시리스트 상태:", newWishlist);
+          return newWishlist;
+        });
+      } else {
+        console.log("📤 POST 요청을 보냅니다...");
+        const response = await axios.post(`${API_URL}/api/wishlist`, {
           productId: image.id,
           title: image.name,
           price: image.price,
           imageUrl: image.src,
-          email: userEmail,
-          name: userName,
-        };
+          userEmail: user.email,
+          userName: user.name,
+        });
   
-        console.log('Data being sent to the server:', dataToSend);
-        console.log('User email from localStorage:', userEmail);
+        console.log("✅ POST 요청 응답:", response);
   
-        const response = await axios.post(
-          `${API_URL}/api/wishlist`,
-          dataToSend,
-          {
-            headers: {
-              'Content-Type': 'application/json',
-            },
-          }
-        );
+        setClickedIcons(prev => {
+          console.log("🔄 클릭 상태 변경 전 상태:", prev);
+          const updatedIcons = { ...prev, [image.id]: true };
+          console.log("🔴 클릭 후 상태:", updatedIcons);
+          return updatedIcons;
+        });
   
-        console.log('Item added successfully to wishlist:', response.data);
-        addToWishlist(response.data); // 위시리스트 상태를 업데이트
-      } catch (error) {
-        console.error('Failed to add item to wishlist:', error);
+        setWishlist(prev => {
+          console.log("🔄 위시리스트 상태 확인 전:", prev);
+          const newWishlist = [...prev, response.data];
+          console.log("✅ 새 아이템 추가 후 상태:", newWishlist);
+          return newWishlist;
+        });
       }
-    } else {
-      console.log('Item removed from wishlist:', image.id);
+    } catch (error) {
+      console.error("❌ 에러 발생:", error.message);
+    } finally {
+      setIsLoading(false);
+      console.log("🚀 로딩 상태를 false로 설정");
     }
   };
-
-  const togglePopup = () => {
-    setShowPopup(!showPopup); // 팝업 상태 토글
-  };
-
-  const getRandomRecommendedProducts = (productId) => {
-    // 같은 상품 제외
-    const recommended = images.filter((image) => image.id !== productId);
-    // 랜덤으로 섞기
-    const shuffled = recommended.sort(() => 0.5 - Math.random());
-    // 4개만 반환
-    return shuffled.slice(0, 4);
-  };
-
-  const handlePopupOpen = (imageId) => {
-    const randomRecommended = getRandomRecommendedProducts(imageId); // 랜덤한 4개 상품 가져오기
-    setRecommendedProducts(randomRecommended); // 상태 저장
-    togglePopup(); // 팝업 열기
-  };
-
-  const TryOnButton = ({ image }) => (
-    <button className="tryon-button" onClick={() => handleTryOnClick(image)}>
-      Try On
-    </button>
-  );
-
-  if (images.length === 0) {
-    return <div>선택된 카테고리에 상품이 없습니다.</div>;
-  }
+  
+  
+  
+  
+  
+  
+  
+  
 
   return (
     <div className="product-gallery">
-      {images.map((image) => (
+      {images.map(image => (
         <div
           key={image.id}
           className={`image-box ${removingItems.includes(image.id) ? 'removing' : ''}`}
         >
-          {/* 코디 추천 텍스트와 원 추가 */}
           <div className="recommendation-tag" onClick={() => handlePopupOpen(image.id)}>
             <div
               className="circle"
-              onMouseEnter={() => setHoveredImage(image.id)} // 마우스 올리기
-              onMouseLeave={() => setHoveredImage(null)} // 마우스 떼기
+              onMouseEnter={() => setHoveredImage(image.id)}
+              onMouseLeave={() => setHoveredImage(null)}
             >
               <span className="recommendation-text">
                 {hoveredImage === image.id ? 'click!' : (
@@ -129,7 +177,7 @@ const Product = ({ images = [], onRemove, removingItems = [] }) => {
           <div className="image-footer">
             <div className="image-info">
               <span className="image-title">{image.name}</span>
-              <span className="image-price">$ {image.price}</span>
+              <span className="image-price">{image.price} 원</span>
             </div>
             <button className="tryon-button" onClick={() => handleTryOnClick(image)}>
               Try On
@@ -137,10 +185,7 @@ const Product = ({ images = [], onRemove, removingItems = [] }) => {
           </div>
           <div
             className={`wishlist-icon ${clickedIcons[image.id] ? 'clicked' : ''}`}
-            onClick={() => {
-              handleWishlistClick(image);
-              console.log(`Wishlist state changed for image: ${image.name} (ID: ${image.id})`);
-            }}
+            onClick={(e) => handleWishlistClick(e, image)}
           >
             <img
               src={clickedIcons[image.id] ? wishlistRed : whishlistBlack}
@@ -150,14 +195,12 @@ const Product = ({ images = [], onRemove, removingItems = [] }) => {
         </div>
       ))}
 
-      {/* 팝업 창 표시 */}
       {showPopup && (
-  <RecommendationPopup
-    onClose={togglePopup}
-    recommendedProducts={recommendedProducts}
-    TryOnButton={TryOnButton} // Try On 버튼 전달
-  />
-)}
+        <RecommendationPopup
+          onClose={() => setShowPopup(false)}
+          recommendedProducts={recommendedProducts}
+        />
+      )}
     </div>
   );
 };
