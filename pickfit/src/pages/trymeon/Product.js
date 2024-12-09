@@ -8,6 +8,7 @@ import whishlistBlack from '../../images/wishlist_black.png';
 import RecommendationPopup from './RecommendationPopup';
 
 const API_URL = process.env.REACT_APP_API_URL;
+const API_Store_URL = process.env.REACT_Store_API_URL;
 
 const Product = ({ images = [], removingItems = [] }) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -34,7 +35,7 @@ const Product = ({ images = [], removingItems = [] }) => {
   useEffect(() => {
     const fetchWishlist = async () => {
       try {
-        const response = await axios.get(`${API_URL}/api/wishlist/${user.email}`);
+        const response = await axios.get(`${API_Store_URL}/api/wishlist/${user.email}`);
         const wishlistData = response.data?.data || [];
         setWishlist(wishlistData);
 
@@ -85,10 +86,9 @@ const Product = ({ images = [], removingItems = [] }) => {
   
       if (isCurrentlyRed) {
         console.log("🗑️ DELETE 요청을 보냅니다...");
-        const response = await axios.delete(
-          `${API_URL}/user/products/${image.id}`,
-          { data: { userEmail: user.email } } // Request body에 이메일 전달
-        );
+        const response = await axios.delete(`${API_Store_URL}/api/wishlist/${image.id}`, {
+          params: { userEmail: user.email },
+        });
   
         console.log("✅ DELETE 요청 응답:", response);
   
@@ -108,7 +108,7 @@ const Product = ({ images = [], removingItems = [] }) => {
         });
       } else {
         console.log("📤 POST 요청을 보냅니다...");
-        const response = await axios.post(`${API_URL}/api/wishlist`, {
+        const response = await axios.post(`${API_Store_URL}/api/wishlist`, {
           productId: image.id,
           title: image.name,
           price: image.price,
@@ -176,7 +176,10 @@ const Product = ({ images = [], removingItems = [] }) => {
           <img src={image.src} alt={image.name} className="product-image" />
           <div className="image-footer">
             <div className="image-info">
-              <span className="image-title">{image.name}</span>
+              {/* 이름이 넘치면 ... 표시되며, 마우스 오버 시 전체 이름 표시 */}
+              <span className="image-title" title={image.name}>
+                {image.name}
+              </span>
               <span className="image-price">{image.price} 원</span>
             </div>
             <button className="tryon-button" onClick={() => handleTryOnClick(image)}>

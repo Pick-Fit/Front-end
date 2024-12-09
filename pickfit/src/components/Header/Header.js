@@ -18,6 +18,7 @@ const Header = () => {
 
   // 환경 변수로 API URL을 가져옵니다.
   const API_URL = process.env.REACT_APP_API_URL;
+  const API_Store_URL = process.env.REACT_Store_API_URL;
 
   // 데이터 만료 시간 설정 (1시간)
   const expiryTime = 3600 * 1000; // 1시간 (밀리초 단위)
@@ -25,7 +26,7 @@ const Header = () => {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const response = await axios.get(`${API_URL}/api/user`, { withCredentials: true });
+        const response = await axios.get(`${API_Store_URL}/api/user`, { withCredentials: true });
 
         // 받은 데이터 콘솔 로그로 출력
         console.log("Received user data:", response.data);
@@ -72,7 +73,7 @@ const Header = () => {
     }, 1000);
 
     return () => clearInterval(interval);
-  }, [API_URL]);
+  }, [API_Store_URL]);
 
   const handleLogoutClick = () => {
     setIsLogoutModalOpen(true);
@@ -80,7 +81,7 @@ const Header = () => {
 
   const handleLogoutConfirm = () => {
     axios
-      .post(`${API_URL}/api/logout`, {}, { withCredentials: true })
+      .post(`${API_Store_URL}/api/logout`, {}, { withCredentials: true })
       .then(() => {
         localStorage.removeItem("userEmail");
         localStorage.removeItem("userName");

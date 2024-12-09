@@ -15,13 +15,15 @@ const MyPage = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(true);
   const [activeSection, setActiveSection] = useState("info");
   const navigate = useNavigate();
+
   const API_URL = process.env.REACT_APP_API_URL;
+  const API_Store_URL = process.env.REACT_Store_API_URL;
 
   useEffect(() => {
     // 사용자 정보를 가져오는 API 호출
     const fetchUserData = async () => {
       try {
-        const response = await axios.get(`${API_URL}/api/user`, { withCredentials: true });
+        const response = await axios.get(`${API_Store_URL}/api/user`, { withCredentials: true });
         const { email, name, phoneNum, nickname, address } = response.data; // API에서 추가 필드 가져오기
         setEmail(email);
         setUserName(name);
