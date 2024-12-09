@@ -4,6 +4,7 @@ import '../styles/Wishlist.css';
 import wishlistIcon from '../images/wishlist2.png';
 
 const API_URL = process.env.REACT_APP_API_URL;
+const API_Store_URL = process.env.REACT_Store_API_URL;
 
 function WishlistPage() {
   const [wishlistItems, setWishlistItems] = useState([]); // 위시리스트 상태
@@ -13,7 +14,7 @@ function WishlistPage() {
       try {
         const userEmail = localStorage.getItem('userEmail');
         if (userEmail) {
-          const response = await axios.get(`${API_URL}/api/wishlist/${userEmail}`);
+          const response = await axios.get(`${API_Store_URL}/api/wishlist/${userEmail}`);
           const data = response?.data?.data || [];
           setWishlistItems(data);
         }
