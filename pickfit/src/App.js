@@ -6,6 +6,7 @@ import { WishlistProvider } from "./contexts/WishlistContext"; // WishlistProvid
 import { TryOnProvider } from './contexts/TryOnContext';
 import Header from "./components/Header/Header";
 import LoadingScreen from "./components/LoadingScreen";
+import { SelectedItemProvider } from "./contexts/SelectedItemContext";
 
 const Home = lazy(() => import("./pages/Home"));
 const LoginPage = lazy(() => import("./pages/LoginPage"));
@@ -33,23 +34,25 @@ function App() {
   // }
 
   return (
-    <TryOnProvider>
-      <AuthProvider>
-        <WishlistProvider> {/* WishlistProvider 추가 */}
-          <Header />
-          <Suspense fallback={<LoadingScreen />}>
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/login" element={<LoginPage />} />
-              <Route path="/mypage" element={<MyPage />} />
-              <Route path="/wishlist" element={<WishlistPage />} />
-              <Route path="/trymeon" element={<TryMeOn />} />
-              <Route path="/tryon" element={<TryOnPage />} />
-            </Routes>
-          </Suspense>
-        </WishlistProvider> {/* WishlistProvider 닫기 */}
-      </AuthProvider>
-    </TryOnProvider>
+    <SelectedItemProvider>
+      <TryOnProvider>
+        <AuthProvider>
+          <WishlistProvider> {/* WishlistProvider 추가 */}
+            <Header />
+            <Suspense fallback={<LoadingScreen />}>
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/login" element={<LoginPage />} />
+                <Route path="/mypage" element={<MyPage />} />
+                <Route path="/wishlist" element={<WishlistPage />} />
+                <Route path="/trymeon" element={<TryMeOn />} />
+                <Route path="/tryon" element={<TryOnPage />} />
+              </Routes>
+            </Suspense>
+          </WishlistProvider> {/* WishlistProvider 닫기 */}
+        </AuthProvider>
+      </TryOnProvider>
+      </SelectedItemProvider>
   );
 }
 

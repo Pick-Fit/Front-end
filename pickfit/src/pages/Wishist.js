@@ -2,19 +2,20 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import '../styles/Wishlist.css';
 import wishlistIcon from '../images/wishlist2.png';
+import closeIcon from '../images/close.png';
 
 const API_URL = process.env.REACT_APP_API_URL;
-const API_Store_URL = process.env.REACT_Store_API_URL;
 
 function WishlistPage() {
   const [wishlistItems, setWishlistItems] = useState([]); // 위시리스트 상태
 
+  // 위시리스트 데이터를 가져오는 함수
   useEffect(() => {
     const fetchWishlist = async () => {
       try {
         const userEmail = localStorage.getItem('userEmail');
         if (userEmail) {
-          const response = await axios.get(`${API_Store_URL}/api/wishlist/${userEmail}`);
+          const response = await axios.get(`${API_URL}/api/wishlist/${userEmail}`);
           const data = response?.data?.data || [];
           setWishlistItems(data);
         }
@@ -25,6 +26,22 @@ function WishlistPage() {
 
     fetchWishlist();
   }, []);
+
+  // 위시리스트에서 항목 삭제 함수
+  const handleRemoveFromWishlist = async (itemId) => {
+    try {
+      const userEmail = localStorage.getItem('userEmail');
+      if (userEmail) {
+        await axios.delete(`${API_URL}/api/wishlist/${itemId}`, {
+          params: { userEmail },
+        });
+        // 삭제 후 위시리스트 업데이트
+        setWishlistItems((prevItems) => prevItems.filter((item) => item.productId !== itemId));
+      }
+    } catch (error) {
+      console.error('Failed to remove item from wishlist:', error.message);
+    }
+  };
 
   return (
     <div className="page-container">
@@ -50,6 +67,12 @@ function WishlistPage() {
                   <p className="wishlist-title">{item.title}</p>
                   <p className="wishlist-price">{item.price} 원</p>
                 </div>
+                <img
+                  src={closeIcon}
+                  alt="Remove"
+                  className="remove-icon"
+                  onClick={() => handleRemoveFromWishlist(item.productId)}
+                />
               </div>
             ))}
           </div>

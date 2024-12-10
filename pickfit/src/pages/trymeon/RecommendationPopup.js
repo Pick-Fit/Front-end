@@ -12,10 +12,8 @@ const RecommendationPopup = ({ onClose, recommendedProducts = [], TryOnButton })
             <div key={product.id} className={`recommended-product row-${index < 2 ? 'top' : 'bottom'}`}>
               <img src={product.src} alt={product.name} className="recommended-product-image" />
               <div className="recommended-product-info">
-                <div>
-                  <span className="recommended-product-name">{product.name}</span>
-                  <span className="recommended-product-price">${product.price}</span>
-                </div>
+                <span className="recommended-product-name">{product.name}</span>
+                <span className="recommended-product-price">{product.price} 원</span>
                 {/* Try On 버튼이 오른쪽에 위치 */}
                 {TryOnButton && <TryOnButton image={product} />}
               </div>

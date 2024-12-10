@@ -46,7 +46,7 @@
   align-items: center; /* 텍스트와 버튼을 세로 중앙 정렬 */
   box-sizing: border-box; /* 패딩 포함 */
 }
-.tryon-button{
+.tryon-button {
   width: 55px;
   background-color: #000000; /* 검정색 배경 */
   color: #ffffff; /* 흰색 텍스트 */
@@ -55,8 +55,28 @@
   padding: 8px 16px;
   font-size: 14px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, color 0.3s ease;
   margin-bottom: 10px; /* 버튼 간 세로 간격 추가 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Try On 클릭 후 체크 아이콘 표시 */
+.tryon-button.tried-on {
+  width: 55px; /* 버튼 크기 유지 */
+  height: 48px; /* 버튼 높이 유지 */
+  background-image: url('../../images/check_white.png'); /* 체크 아이콘 */
+  background-size: 24px; /* 아이콘 크기 */
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: #000000; /* 검정색 배경 유지 */
+  color: transparent; /* 텍스트 숨기기 */
+  border: none;
+  border-radius: 8px; /* 동일한 둥근 모서리 */
+  padding: 8px 16px; /* 동일한 패딩 */
+  cursor: pointer;
+  margin-bottom: 10px; /* 동일한 버튼 간격 */
 }
 
 .image-info {
@@ -67,7 +87,6 @@
 }
 .image-title {
   font-size: 20px;
-  font-weight: bold;
   color: #333;
   margin-bottom: 10px;
   white-space: nowrap; /* 한 줄로 표시 */
@@ -117,7 +136,7 @@
 .circle {
   width: 50px;
   height: 50px;
-  background: linear-gradient(135deg, #9c27b0, #673ab7);
+  background: linear-gradient(135deg, #dddada, #d34242);
   background-size: 200% 200%;
   animation: gradientAnimation 5s ease infinite; /* 그라데이션 애니메이션 */
   border-radius: 50%;
@@ -163,4 +182,36 @@
 .recommendation-part:hover {
   cursor: pointer;
   text-decoration: underline; /* 호버 시 밑줄 추가 */
+}
+
+.icon-active {
+  width: 16px; /* 원하는 사이즈로 조절 */
+  height: 16px;
+}
+
+/* 미디어 쿼리: 태블릿(768px 이하)에서 그리드 열 조정 */
+@media (max-width: 768px) {
+  .product-gallery {
+    grid-template-columns: repeat(3, 1fr); /* 3개로 변경 */
+  }
+
+  .image-box {
+    width: 250px; /* 너비도 태블릿에 맞게 조정 */
+  }
+}
+
+/* 미디어 쿼리: 모바일 (480px 이하)에서 그리드 열 조정 */
+@media (max-width: 480px) {
+  .product-gallery {
+    grid-template-columns: repeat(1, 1fr); /* 단일 열로 변경 */
+  }
+
+  .image-box {
+    width: 100%; /* 전체 너비 활용 */
+    height: auto; /* 비율 맞춤 */
+  }
+
+  .image-footer {
+    height: auto; /* 모바일 화면에서 하단 높이 유동적으로 */
+  }
 }

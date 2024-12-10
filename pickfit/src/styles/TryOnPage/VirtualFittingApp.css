@@ -1,0 +1,173 @@
+:root {
+    --black: #000000;
+    --white: #FFFFFF;
+    --gray-dark: #444444;
+    --gray-medium: #888888;
+    --gray-light: #f4f4f4;
+  }
+  
+  .virtual-fitting-app {
+    background-color: var(--white);
+    color: var(--gray-dark);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding-top: 70px;
+  }
+  
+  /* Main Content Styles */
+  main {
+    flex-grow: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  /* Virtual Try-On Section */
+  .virtual-tryon-section {
+    background-color: var(--gray-light);
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1.5rem;
+  }
+  
+  .virtual-tryon-content {
+    width: 100%;
+    height: 500px;
+    background-color: var(--gray-medium);
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--white);
+  }
+  
+  .virtual-tryon-placeholder {
+    text-align: center;
+  }
+  
+  .virtual-tryon-placeholder h2 {
+    margin: 1rem 0;
+    font-size: 1.25rem;
+  }
+  
+  .button-group {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+  }
+  
+  .take-photo-btn, .upload-image-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .take-photo-btn {
+    background-color: var(--black);
+    color: var(--white);
+  }
+  
+  .upload-image-btn {
+    background-color: transparent;
+    border: 2px solid var(--black);
+    color: var(--black);
+  }
+  
+  /* Clothing Items Section */
+  .clothing-items-section h2 {
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+  }
+  
+  .items-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1.5rem;
+  }
+  
+  .item-card {
+    width: 300px;
+    height: 500px;
+    border: 2px solid var(--gray-medium);
+    border-radius: 12px;
+    padding: 1rem;
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
+  
+  .item-card.selected {
+    border-color: var(--black);
+    background-color: var(--gray-light);
+  }
+  
+  .item-card img {
+    width: 250px;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+  }
+  
+  .item-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+  
+  .item-details h3 {
+    font-weight: bold;
+  }
+  
+  .item-details p {
+    color: var(--gray-medium);
+  }
+  
+  .price {
+    font-weight: bold;
+  }
+  
+  .tryon-btn {
+    background-color: var(--black);
+    color: var(--white);
+    padding: 0.75rem;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+
+  .button-icon {
+    width: 24px;
+    height: 24px;
+  }
+
+  .camera-icon {
+    width: 64px;
+    height: 60px;
+  }
+  
+  /* Footer */
+  footer {
+    background-color: var(--black);
+    color: var(--white);
+    text-align: center;
+    padding: 1rem;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 1024px) {
+    main {
+      grid-template-columns: 1fr;
+    }
+  }
