@@ -26,7 +26,7 @@ const Header = () => {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const response = await axios.get(`${API_Store_URL}/api/user`, { withCredentials: true });
+        const response = await axios.get(`${API_URL}/api/user`, { withCredentials: true });
 
         // 받은 데이터 콘솔 로그로 출력
         console.log("Received user data:", response.data);
@@ -73,7 +73,7 @@ const Header = () => {
     }, 1000);
 
     return () => clearInterval(interval);
-  }, [API_Store_URL]);
+  }, [API_URL]);
 
   const handleLogoutClick = () => {
     setIsLogoutModalOpen(true);
@@ -81,7 +81,7 @@ const Header = () => {
 
   const handleLogoutConfirm = () => {
     axios
-      .post(`${API_Store_URL}/api/logout`, {}, { withCredentials: true })
+      .post(`${API_URL}/api/logout`, {}, { withCredentials: true })
       .then(() => {
         localStorage.removeItem("userEmail");
         localStorage.removeItem("userName");
