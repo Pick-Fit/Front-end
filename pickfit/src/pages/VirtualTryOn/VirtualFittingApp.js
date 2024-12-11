@@ -44,7 +44,7 @@ const VirtualFittingApp = () => {
       </main>
 
       <footer>
-        <p>© 2024 Virtual Fitting Room. All Rights Reserved.</p>
+        <p>© 2024 Pickfit. 매일의 스타일을 완성하는 곳, 당신의 취향을 반영한 패션을 제안합니다. 세상에 하나뿐인 나만의 스타일을 경험하세요.</p>
       </footer>
     </div>
   );
