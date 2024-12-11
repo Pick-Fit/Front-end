@@ -23,11 +23,11 @@
     gap: 2rem;
     padding: 2rem;
     max-width: 1200px;
-    margin: 0 auto;
   }
   
   /* Virtual Try-On Section */
   .virtual-tryon-section {
+    width: 500px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -291,20 +291,96 @@
     height: auto;
     margin-bottom: 20px;
   }
-  
-  button {
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  button:hover {
-    background-color: #0056b3;
-  }
   .close-icon img{
     width: 30px;
     height: 30px;
+  }
+
+  .section-selector {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+    gap: 40px;
+  }
+  
+  .section-btn {
+    font-size: 30px;
+    font-weight: 600;
+    color: black; /* 텍스트 색상 */
+    position: relative;
+    cursor: pointer;
+    padding-bottom: 5px;
+    transition: color 0.3s ease;
+  }
+
+  .section-btn::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background-color: black; /* 밑줄 색상 */
+    transition: all 0.3s ease;
+  }
+
+  .section-btn:hover {
+    color: black; /* 텍스트 색상 */
+  }
+  
+  .section-btn:hover::before {
+    width: 100%; /* 호버 시 밑줄이 점점 길어짐 */
+    left: 0%; /* 밑줄이 중앙에서 양쪽으로 확장됨 */
+  }
+  
+  .section-btn.active {
+    color: black; /* 활성화된 버튼의 색상 */
+  }
+  
+  .items-grid {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+  }
+  
+  .models-grid {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  
+  .model-card, .item-card {
+    width: 300px;
+    height: 500px;
+    border: 2px solid var(--gray-medium);
+    border-radius: 12px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: all 0.3s ease;
+  }
+  
+  .item-name-price, .model-card p {
+    text-align: center;
+    margin-top: 10px;
+  }
+  
+  .model-card p {
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: var(--gray-medium);
+  }
+  
+  .item-name-price h2 {
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+  
+  .item-name-price p {
+    font-size: 1rem;
+    color: var(--gray-medium);
   }
