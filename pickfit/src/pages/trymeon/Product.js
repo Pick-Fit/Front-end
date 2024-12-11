@@ -60,12 +60,22 @@ const Product = ({ images = [], removingItems = [] }) => {
 
   const handleTryOnClick = (image) => {
     console.log("Setting image for Virtual Try On:", image);
+  
+    // id 값이 포함된 image 객체를 설정
     setSelectedItem({
+      id: image.id,      // id 추가
       name: image.name,
       src: image.src,
       price: image.price,
     });
+  
+    // Update the isTriedOn state for the clicked image
+    setIsTriedOn((prevState) => ({
+      ...prevState,
+      [image.id]: true,  // image.id로 tried on 상태 업데이트
+    }));
   };
+  
 
   const handlePopupOpen = (imageId) => {
     const randomRecommended = images
@@ -170,7 +180,15 @@ const Product = ({ images = [], removingItems = [] }) => {
               className="tryon-button"
               onClick={() => handleTryOnClick(image)}
             >
-              Try On
+              {isTriedOn[image.id] ? (
+                <img
+                  src={checkWhiteIcon}
+                  alt="Checked Icon"
+                  className="check-icon"
+                />
+              ) : (
+                "Try On"
+              )}
             </div>
           </div>
           <div

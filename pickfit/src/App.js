@@ -13,7 +13,7 @@ const LoginPage = lazy(() => import("./pages/LoginPage"));
 const MyPage = lazy(() => import("./pages/Mypage/MyPage"));
 const WishlistPage = lazy(() => import("./pages/Wishist"));
 const TryMeOn = lazy(() => import("./pages/trymeon/TryMeOn"));
-const TryOnPage = lazy(() => import("./pages/TryOnPage/TryOnPage"));
+const VirtualFittingApp = lazy(() => import("./pages/VirtualTryOn/VirtualFittingApp"));
 // const Spinner = lazy(() => import("./components/Spinner"));
 
 function App() {
@@ -46,7 +46,7 @@ function App() {
                 <Route path="/mypage" element={<MyPage />} />
                 <Route path="/wishlist" element={<WishlistPage />} />
                 <Route path="/trymeon" element={<TryMeOn />} />
-                <Route path="/tryon" element={<TryOnPage />} />
+                <Route path="/tryon" element={<VirtualFittingApp />} />
               </Routes>
             </Suspense>
           </WishlistProvider> {/* WishlistProvider 닫기 */}
