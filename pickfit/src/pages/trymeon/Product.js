@@ -10,7 +10,6 @@ import RecommendationPopup from "./RecommendationPopup";
 import { SelectedItemContext } from "../../contexts/SelectedItemContext";
 
 const API_URL = process.env.REACT_APP_API_URL;
-const API_Store_URL = process.env.REACT_Store_API_URL;
 
 const Product = ({ images = [], removingItems = [] }) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -59,23 +58,27 @@ const Product = ({ images = [], removingItems = [] }) => {
   }, [user.email]);
 
   const handleTryOnClick = (image) => {
-    console.log("Setting image for Virtual Try On:", image);
+    console.log("Try On Clicked:");
+    console.log({
+      email: user.email, // 사용자 이메일
+      id: image.id,      // 상품 ID
+      src: image.src,    // 상품 이미지 URL
+      bigCategory: image.bigCategory, // 상품 대분류
+    });
   
-    // id 값이 포함된 image 객체를 설정
     setSelectedItem({
-      id: image.id,      // id 추가
+      id: image.id,
       name: image.name,
       src: image.src,
       price: image.price,
+      bigCategory: image.bigCategory,
     });
   
-    // Update the isTriedOn state for the clicked image
     setIsTriedOn((prevState) => ({
       ...prevState,
       [image.id]: true,  // image.id로 tried on 상태 업데이트
     }));
   };
-  
 
   const handlePopupOpen = (imageId) => {
     const randomRecommended = images
@@ -204,7 +207,6 @@ const Product = ({ images = [], removingItems = [] }) => {
           </div>
         </div>
       ))}
-
       {showPopup && (
         <RecommendationPopup
           onClose={() => setShowPopup(false)}
