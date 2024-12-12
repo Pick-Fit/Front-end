@@ -26,7 +26,7 @@
   }
   
   /* Virtual Try-On Section */
-  .virtual-tryon-section {
+  .virtual-tryon-div {
     width: 500px;
     display: flex;
     justify-content: center;

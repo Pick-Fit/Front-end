@@ -10,6 +10,7 @@ import RecommendationPopup from "./RecommendationPopup";
 import { SelectedItemContext } from "../../contexts/SelectedItemContext";
 
 const API_URL = process.env.REACT_APP_API_URL;
+const API_Store_URL = process.env.REACT_Store_API_URL;
 
 const Product = ({ images = [], removingItems = [] }) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -66,6 +67,7 @@ const Product = ({ images = [], removingItems = [] }) => {
       bigCategory: image.bigCategory, // 상품 대분류
     });
   
+    // 선택된 데이터를 context에 저장
     setSelectedItem({
       id: image.id,
       name: image.name,
@@ -74,11 +76,13 @@ const Product = ({ images = [], removingItems = [] }) => {
       bigCategory: image.bigCategory,
     });
   
+    // Update the isTriedOn state for the clicked image
     setIsTriedOn((prevState) => ({
       ...prevState,
       [image.id]: true,  // image.id로 tried on 상태 업데이트
     }));
   };
+  
 
   const handlePopupOpen = (imageId) => {
     const randomRecommended = images
@@ -207,6 +211,7 @@ const Product = ({ images = [], removingItems = [] }) => {
           </div>
         </div>
       ))}
+
       {showPopup && (
         <RecommendationPopup
           onClose={() => setShowPopup(false)}
