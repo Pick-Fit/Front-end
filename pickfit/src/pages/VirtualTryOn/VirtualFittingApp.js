@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
 import { SelectedItemContext } from "../../contexts/SelectedItemContext";
-import VirtualTryOnSection from "./VirtualTryOnSection ";
+import VirtualTryOnSection from "./VirtualTryOnSection";
 import ClothingItemsSection from "./ClothingItemsSection";
 
 const VirtualFittingApp = () => {
