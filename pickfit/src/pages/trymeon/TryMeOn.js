@@ -17,6 +17,7 @@ const allJsonData = [
       ...item,
       category: '여자', // '여자' 카테고리 추가
       subcategory: subcategory, // 하위 카테고리 추가
+      bigCategory: item.category_analysis ? item.category_analysis.big_category : null, // big_category 추가
     }));
   }),
   ...requireImagesMan.keys().map((key) => {
@@ -26,6 +27,7 @@ const allJsonData = [
       ...item,
       category: '남자', // '남자' 카테고리 추가
       subcategory: subcategory, // 하위 카테고리 추가
+      bigCategory: item.category_analysis ? item.category_analysis.big_category : null, // big_category 추가
     }));
   }),
 ].flat(); // 배열을 평탄화하여 하나의 배열로 만듭니다.
@@ -41,6 +43,7 @@ const jsonImages = allJsonData
     price: item.product_info.price,
     category: item.category, // '여자' 또는 '남자' 카테고리 값
     subcategory: item.subcategory, // 하위 카테고리
+    bigCategory: item.bigCategory, // big_category 값 추가
     detailUrl: item.product_info.detail_page_url,
   }));
 
@@ -49,6 +52,7 @@ const TryMeOn = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedCategory, setSelectedCategory] = useState(null); // 카테고리 선택
   const [selectedSubcategory, setSelectedSubcategory] = useState(null);
+  const [selectedBigCategory, setSelectedBigCategory] = useState(null); // big_category 필터 추가
 
   const handlePageChange = (page) => {
     setCurrentPage(page);
@@ -59,6 +63,10 @@ const TryMeOn = () => {
     setSelectedSubcategory(null); // 카테고리 선택 시 서브카테고리 초기화
   };
 
+  const handleBigCategorySelect = (bigCategory) => {
+    setSelectedBigCategory(bigCategory); // big_category 선택
+  };
+
   const handleSubcategorySelect = (subcategory) => {
     setSelectedSubcategory(subcategory);
   };
@@ -66,13 +74,15 @@ const TryMeOn = () => {
   const handleResetFilters = () => {
     setSelectedCategory(null);
     setSelectedSubcategory(null);
+    setSelectedBigCategory(null); // big_category 초기화
   };
 
-  // 카테고리와 서브카테고리 필터링
+  // 카테고리, 서브카테고리, bigCategory 필터링
   const filteredImages = jsonImages.filter((item) => {
     const categoryMatch = selectedCategory ? item.category === selectedCategory : true;
     const subcategoryMatch = selectedSubcategory ? item.subcategory === selectedSubcategory : true;
-    return categoryMatch && subcategoryMatch;
+    const bigCategoryMatch = selectedBigCategory ? item.bigCategory === selectedBigCategory : true;
+    return categoryMatch && subcategoryMatch && bigCategoryMatch;
   });
 
   const startIndex = (currentPage - 1) * itemsPerPage;
@@ -83,14 +93,26 @@ const TryMeOn = () => {
     ? [...new Set(filteredImages.filter(item => item.category === selectedCategory).map(item => item.subcategory))]
     : [];
 
+// bigCategory 목록 추출 (고른 카테고리에 해당하는 big_category 목록만 가져옴)
+  const availableBigCategories = selectedCategory
+    ? [...new Set(filteredImages.filter(item => item.category === selectedCategory).map(item => item.bigCategory))]
+    : [];
+
+
+  // bigCategory 값 콘솔 로그
+  console.log("Available Big Categories:", availableBigCategories);
+
   return (
     <div className="try-me-on-container">
       <div className="main-content">
         <CategoryFilter
           selectedCategory={selectedCategory}
           selectedSubcategory={selectedSubcategory}
+          selectedBigCategory={selectedBigCategory} // big_category 선택 전달
           availableSubcategories={availableSubcategories} // 서브카테고리 목록 전달
+          availableBigCategories={availableBigCategories} // big_category 목록 전달
           onCategorySelect={handleCategorySelect}
+          onBigCategorySelect={handleBigCategorySelect} // big_category 선택 처리
           onResetFilters={handleResetFilters}
           onSubcategorySelect={handleSubcategorySelect}
         />

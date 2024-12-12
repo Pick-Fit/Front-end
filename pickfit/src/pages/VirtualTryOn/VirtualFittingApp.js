@@ -4,11 +4,11 @@ import VirtualTryOnSection from "./VirtualTryOnSection ";
 import ClothingItemsSection from "./ClothingItemsSection";
 
 const VirtualFittingApp = () => {
-  const [virtualTryOn, setVirtualTryOn] = useState(false);
+  const [selectedItemForProduct, setSelectedItemForProduct] = useState(null); // 상품 선택 상태
+  const [selectedItemForModel, setSelectedItemForModel] = useState(null); // 모델 선택 상태
   const { selectedItems, removeItems } = useContext(SelectedItemContext);
   const [currentPage, setCurrentPage] = useState(0);
 
-  // selectedItems 변경 시 콘솔 로그 추가
   useEffect(() => {
     console.log("Selected Items Updated: ", selectedItems);
   }, [selectedItems]);
@@ -33,13 +33,18 @@ const VirtualFittingApp = () => {
   return (
     <div className="virtual-fitting-app">
       <main>
-        <VirtualTryOnSection virtualTryOn={virtualTryOn} setVirtualTryOn={setVirtualTryOn} />
+        <VirtualTryOnSection
+          selectedItemForProduct={selectedItemForProduct}
+          selectedItemForModel={selectedItemForModel}
+        />
         <ClothingItemsSection
           selectedItems={selectedItems}
           goToPrevPage={goToPrevPage}
           goToNextPage={goToNextPage}
           removeSelectedItem={removeSelectedItem}
           currentPage={currentPage}
+          setSelectedItemForProduct={setSelectedItemForProduct} // 상품 선택 상태 전달
+          setSelectedItemForModel={setSelectedItemForModel} // 모델 선택 상태 전달
         />
       </main>
 
