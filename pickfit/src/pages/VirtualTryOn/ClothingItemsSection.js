@@ -20,23 +20,19 @@ const ClothingItemsSection = ({
   const modelData = [
     {
       id: "model1",
-      name: "모델 1",
-      imageUrl: "https://lh3.google.com/u/0/d/1st_f91QEPPhnw1nqdTvrQWgIVaCxtXWb=w1920-h945-iv1",
+      imageUrl: "https://spnimage.edaily.co.kr/images/photo/files/NP/S/2015/12/PS15122200034.jpg",
     },
     {
       id: "model2",
-      name: "모델 2",
-      imageUrl: "https://via.placeholder.com/300x400?text=Model+2",
+      imageUrl: "http://localhost:8000/static/20241212181223_output.jpg",
     },
     {
       id: "model3",
-      name: "모델 3",
-      imageUrl: "https://via.placeholder.com/300x400?text=Model+3",
+      imageUrl: "https://file.mk.co.kr/meet/neds/2021/09/image_readtop_2021_925000_16328773574798448.jpg",
     },
     {
       id: "model4",
-      name: "모델 4",
-      imageUrl: "https://via.placeholder.com/300x400?text=Model+4",
+      imageUrl: "https://lh3.google.com/u/0/d/13K_n11mpjMuaWdc-TWwVzJbG75mxr3nz=w1920-h945-iv1",
     },
   ];
 
@@ -66,7 +62,6 @@ const ClothingItemsSection = ({
 
   return (
     <section className="clothing-items-section">
-      <h2>Virtual-Tryon</h2>
 
       <div className="section-selector">
         <div
@@ -107,7 +102,6 @@ const ClothingItemsSection = ({
                     <img src={item.src} alt={item.name} />
                   </div>
                   <div className="item-name-price">
-                    <h2>{item.name}</h2>
                     <p>{item.price} 원</p>
                   </div>
                   <div
