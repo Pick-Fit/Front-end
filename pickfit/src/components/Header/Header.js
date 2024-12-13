@@ -18,7 +18,7 @@ const Header = () => {
 
   // 환경 변수로 API URL을 가져옵니다.
   const API_URL = process.env.REACT_APP_API_URL;
-  const API_Store_URL = process.env.REACT_Store_API_URL;
+  // const  = process.env.REACT_Store_API_URL;
 
   // 데이터 만료 시간 설정 (1시간)
   const expiryTime = 3600 * 1000; // 1시간 (밀리초 단위)
