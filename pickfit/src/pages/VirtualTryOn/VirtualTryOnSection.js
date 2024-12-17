@@ -103,16 +103,18 @@ const VirtualTryOnSection = ({ selectedItemForProduct }) => {
         <p>이미지가 없습니다.</p>
       )}
       <div className={`slide-box ${isBoxVisible ? "visible" : "hidden"}`}>
-        {selectedItemForProduct && (
-          <div className="selected-item">
-            <img src={selectedItemForProduct.src} alt={`Selected ${selectedItemForProduct.id}`} />
-          </div>
-        )}
-        {selectedItemForModel && (
-          <div className="selected-item">
-            <img src={selectedItemForModel.src} alt={`Selected Model ${selectedItemForModel.id}`} />
-          </div>
-        )}
+        <div className="selected-items">
+          {selectedItemForProduct && (
+            <div className="selected-item">
+              <img src={selectedItemForProduct.src} alt={`Selected Product ${selectedItemForProduct.id}`} />
+            </div>
+          )}
+          {selectedItemForModel && (
+            <div className="selected-item">
+              <img src={selectedItemForModel.src} alt={`Selected Model ${selectedItemForModel.id}`} />
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );
