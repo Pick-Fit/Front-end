@@ -7,7 +7,6 @@
 
 ## 프로젝트 구조
 ```js
-.
 pickfit 
 ├── public
 │   ├── index.html
