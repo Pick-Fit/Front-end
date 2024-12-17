@@ -55,15 +55,7 @@ pickfit
 │   │   ├── wishlist_white.png
 │   │   └── woman.png
 │   ├── man
-│   │   ├── category_processed_Blazer_Suit.json
-│   │   ├── category_processed_Coat.json
-│   │   ├── category_processed_Outerwear.json
-│   │   ├── category_processed_Padding.json
-│   │   ├── category_processed_Pants_denim.json
-│   │   ├── category_processed_Sports_Outdoor.json
-│   │   ├── category_processed_T-shirt_sweatshirt.json
-│   │   ├── category_processed_jacket.json
-│   │   └── category_processed_knitwear.json
+│   │   ├── 트렌비 남성 의류 데이터.json
 │   ├── modal
 │   │   ├── LoginModal.js
 │   │   └── LogoutModal.js
@@ -104,17 +96,7 @@ pickfit
 │   │   ├── TabNavigation.css
 │   │   └── Wishlist.css
 │   ├── woman
-│   │   ├── category_processed_Blouse_Shirt.json
-│   │   ├── category_processed_One-Piece_Jump-Suit.json
-│   │   ├── category_processed_Outerwear.json
-│   │   ├── category_processed_Pants_denim.json
-│   │   ├── category_processed_Skirt.json
-│   │   ├── category_processed_Sports_Outdoor.json
-│   │   ├── category_processed_T-shirt_sweatshirt.json
-│   │   ├── category_processed_coat.json
-│   │   └── category_processed_jacket.json
-│   │   └── category_processed_knitwear.json
-│   │   └── category_processed_padding.json
+│   │   ├── 트렌비 여성 의류 데이터.json
 │   ├── App.css
 │   ├── App.js
 │   ├── App.test.js
