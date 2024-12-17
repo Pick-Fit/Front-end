@@ -127,8 +127,5 @@ pickfit
 ├── package.json
 └── README.md
 ```
-## 🛠 페이지 소개
-- [메인 페이지](#Home.js) Home.js
-- [로그인 페이지](LoginPage.js) LoginPage.js
-- [위시리스트](Wishlist.js) Wishlist.js
--  
+## 🛠 페이지별 기능
+# 메인페이지
