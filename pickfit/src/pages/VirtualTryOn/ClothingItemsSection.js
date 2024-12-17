@@ -20,7 +20,7 @@ const ClothingItemsSection = ({
   const modelData = [
     {
       id: "model1",
-      imageUrl: "https://spnimage.edaily.co.kr/images/photo/files/NP/S/2015/12/PS15122200034.jpg",
+      imageUrl: "https://i.ibb.co/TRhZzwh/processed-image.png",
     },
     {
       id: "model2",
@@ -32,7 +32,7 @@ const ClothingItemsSection = ({
     },
     {
       id: "model4",
-      imageUrl: "https://lh3.google.com/u/0/d/13K_n11mpjMuaWdc-TWwVzJbG75mxr3nz=w1920-h945-iv1",
+      imageUrl: "C:\Users\hi\OneDrive\바탕 화면\KakaoTalk_20241216_201323882.png",
     },
   ];
 

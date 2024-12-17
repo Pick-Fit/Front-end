@@ -8,7 +8,7 @@ import whishlistBlack from "../../images/wishlist_black.png";
 import checkWhiteIcon from "../../images/check_white.png";
 import RecommendationPopup from "./RecommendationPopup";
 import { SelectedItemContext } from "../../contexts/SelectedItemContext";
-
+import "../../styles/trymeon/TryOnButton.css"
 const API_URL = process.env.REACT_APP_API_URL;
 const API_Store_URL = process.env.REACT_Store_API_URL;
 
