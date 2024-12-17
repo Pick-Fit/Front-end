@@ -8,121 +8,121 @@
 ## 프로젝트 구조
 ```js
 .
-pickfit <br>
-├── public<br>
-│   ├── index.html<br>
-│   └── manifest.json<br>
-├── src<br>
-│   ├── components<br>
-│   │   ├── Header<br>
-│   │   │   ├── Header.js<br>
-│   │   │   ├── HeaderIcons.js<br>
-│   │   │   ├── HeaderLogo.js<br>
-│   │   │   └── HeaderWelcome.js<br>
-│   │   ├── LoadingScreen.js<br>
-│   │   ├── Pagination.js<br>
-│   │   └── Spinner.js<br>
-│   ├── contexts<br>
-│   │   ├── AuthContext.js<br>
-│   │   ├── SelectedItemContext.js<br>
-│   │   ├── TryOnContext.js<br>
-│   │   └── WishlistContext.js<br>
-│   ├── font<br>
-│   │   └── euljiro.ttf<br>
-│   ├── images<br>
-│   │   ├── Product_LeftArrow.png<br>
-│   │   ├── Product_RightArrow.png<br>
-│   │   ├── basket.png<br>
-│   │   ├── check.png<br>
-│   │   ├── check_white.png<br>
-│   │   ├── close.png<br>
-│   │   ├── google.png<br>
-│   │   ├── inspection.png<br>
-│   │   ├── leftArrow.png<br>
-│   │   ├── lock.png<br>
-│   │   ├── main_header_logo.png<br>
-│   │   ├── main_logo.png<br>
-│   │   ├── main_second_logo.png<br>
-│   │   ├── man.png<br>
-│   │   ├── myPage.png<br>
-│   │   ├── rightArrow.png<br>
-│   │   ├── tryMeOn.png<br>
-│   │   ├── wishlist2.png<br>
-│   │   ├── wishlist_black.png<br>
-│   │   ├── wishlist_rad.png<br>
-│   │   ├── wishlist_white.png<br>
-│   │   └── woman.png<br>
-│   ├── man<br>
-│   │   ├── category_processed_Blazer_Suit.json<br>
-│   │   ├── category_processed_Coat.json<br>
-│   │   ├── category_processed_Outerwear.json<br>
-│   │   ├── category_processed_Padding.json<br>
-│   │   ├── category_processed_Pants_denim.json<br>
-│   │   ├── category_processed_Sports_Outdoor.json<br>
-│   │   ├── category_processed_T-shirt_sweatshirt.json<br>
-│   │   ├── category_processed_jacket.json<br>
-│   │   └── category_processed_knitwear.json<br>
-│   ├── modal<br>
-│   │   ├── LoginModal.js<br>
-│   │   └── LogoutModal.js<br>
-│   ├── pages<br>
-│   │   ├── Mypage<br>
-│   │   │   ├── MaintenanceSection.js<br>
-│   │   │   ├── MyPage.js<br>
-│   │   │   ├── ProfileSection.js<br>
-│   │   │   ├── SectionContent.js<br>
-│   │   │   └── Sidebar.js<br>
-│   │   ├── VirtualTryOn<br>
-│   │   │   ├── ClothingItemsSection.js<br>
-│   │   │   ├── VirtualFittingApp.js<br>
-│   │   │   ├── VirtualTryOnSection .js<br>
-│   │   │   └── VirtualTryOnSection.js<br>
-│   │   ├── trymeon<br>
-│   │   │   ├── CategoryFilter.js<br>
-│   │   │   ├── Product.js<br>
-│   │   │   ├── RecommendationPopup.js<br>
-│   │   │   └── TryMeOn.js<br>
-│   │   ├── Home.js<br>
-│   │   ├── LoginPage.js<br>
-│   │   └── Wishlist.js<br>
-│   ├── styles<br>
-│   │   ├── TryOnPage<br>
-│   │   │   └── VirtualFittingApp.css<br>
-│   │   ├── trymeon<br>
-│   │   │   ├── CategoryFilter.css<br>
-│   │   │   ├── Product.css<br>
-│   │   │   ├── RecommendationPopup.css<br>
-│   │   │   └── TryMeOn.css<br>
-│   │   ├── LoadingScreen.css<br>
-│   │   ├── LoginModal.css<br>
-│   │   ├── LogoutModel.css<br>
-│   │   ├── MyPage.css<br>
-│   │   ├── Pagination.css<br>
-│   │   ├── Spinner.css<br>
-│   │   ├── TabNavigation.css<br>
-│   │   └── Wishlist.css<br>
-│   ├── woman<br>
-│   │   ├── category_processed_Blouse_Shirt.json<br>
-│   │   ├── category_processed_One-Piece_Jump-Suit.json<br>
-│   │   ├── category_processed_Outerwear.json<br>
-│   │   ├── category_processed_Pants_denim.json<br>
-│   │   ├── category_processed_Skirt.json<br>
-│   │   ├── category_processed_Sports_Outdoor.json<br>
-│   │   ├── category_processed_T-shirt_sweatshirt.json<br>
-│   │   ├── category_processed_coat.json<br>
-│   │   └── category_processed_jacket.json<br>
-│   │   └── category_processed_knitwear.json<br>
-│   │   └── category_processed_padding.json<br>
-│   ├── App.css<br>
-│   ├── App.js<br>
-│   ├── App.test.js<br>
-│   ├── index.css<br>
-│   ├── index.js<br>
-│   ├── reportWebVitals.js<br>
-│   └── setupTests.js<br>
-├── .gitignore<br>
-├── package-lock.json<br>
-├── package.json<br>
+pickfit 
+├── public
+│   ├── index.html
+│   └── manifest.json
+├── src
+│   ├── components
+│   │   ├── Header
+│   │   │   ├── Header.js
+│   │   │   ├── HeaderIcons.js
+│   │   │   ├── HeaderLogo.js
+│   │   │   └── HeaderWelcome.js
+│   │   ├── LoadingScreen.js
+│   │   ├── Pagination.js
+│   │   └── Spinner.js
+│   ├── contexts
+│   │   ├── AuthContext.js
+│   │   ├── SelectedItemContext.js
+│   │   ├── TryOnContext.js
+│   │   └── WishlistContext.js
+│   ├── font
+│   │   └── euljiro.ttf
+│   ├── images
+│   │   ├── Product_LeftArrow.png
+│   │   ├── Product_RightArrow.png
+│   │   ├── basket.png
+│   │   ├── check.png
+│   │   ├── check_white.png
+│   │   ├── close.png
+│   │   ├── google.png
+│   │   ├── inspection.png
+│   │   ├── leftArrow.png
+│   │   ├── lock.png
+│   │   ├── main_header_logo.png
+│   │   ├── main_logo.png
+│   │   ├── main_second_logo.png
+│   │   ├── man.png
+│   │   ├── myPage.png
+│   │   ├── rightArrow.png
+│   │   ├── tryMeOn.png
+│   │   ├── wishlist2.png
+│   │   ├── wishlist_black.png
+│   │   ├── wishlist_rad.png
+│   │   ├── wishlist_white.png
+│   │   └── woman.png
+│   ├── man
+│   │   ├── category_processed_Blazer_Suit.json
+│   │   ├── category_processed_Coat.json
+│   │   ├── category_processed_Outerwear.json
+│   │   ├── category_processed_Padding.json
+│   │   ├── category_processed_Pants_denim.json
+│   │   ├── category_processed_Sports_Outdoor.json
+│   │   ├── category_processed_T-shirt_sweatshirt.json
+│   │   ├── category_processed_jacket.json
+│   │   └── category_processed_knitwear.json
+│   ├── modal
+│   │   ├── LoginModal.js
+│   │   └── LogoutModal.js
+│   ├── pages
+│   │   ├── Mypage
+│   │   │   ├── MaintenanceSection.js
+│   │   │   ├── MyPage.js
+│   │   │   ├── ProfileSection.js
+│   │   │   ├── SectionContent.js
+│   │   │   └── Sidebar.js
+│   │   ├── VirtualTryOn
+│   │   │   ├── ClothingItemsSection.js
+│   │   │   ├── VirtualFittingApp.js
+│   │   │   ├── VirtualTryOnSection .js
+│   │   │   └── VirtualTryOnSection.js
+│   │   ├── trymeon
+│   │   │   ├── CategoryFilter.js
+│   │   │   ├── Product.js
+│   │   │   ├── RecommendationPopup.js
+│   │   │   └── TryMeOn.js
+│   │   ├── Home.js
+│   │   ├── LoginPage.js
+│   │   └── Wishlist.js
+│   ├── styles
+│   │   ├── TryOnPage
+│   │   │   └── VirtualFittingApp.css
+│   │   ├── trymeon
+│   │   │   ├── CategoryFilter.css
+│   │   │   ├── Product.css
+│   │   │   ├── RecommendationPopup.css
+│   │   │   └── TryMeOn.css
+│   │   ├── LoadingScreen.css
+│   │   ├── LoginModal.css
+│   │   ├── LogoutModel.css
+│   │   ├── MyPage.css
+│   │   ├── Pagination.css
+│   │   ├── Spinner.css
+│   │   ├── TabNavigation.css
+│   │   └── Wishlist.css
+│   ├── woman
+│   │   ├── category_processed_Blouse_Shirt.json
+│   │   ├── category_processed_One-Piece_Jump-Suit.json
+│   │   ├── category_processed_Outerwear.json
+│   │   ├── category_processed_Pants_denim.json
+│   │   ├── category_processed_Skirt.json
+│   │   ├── category_processed_Sports_Outdoor.json
+│   │   ├── category_processed_T-shirt_sweatshirt.json
+│   │   ├── category_processed_coat.json
+│   │   └── category_processed_jacket.json
+│   │   └── category_processed_knitwear.json
+│   │   └── category_processed_padding.json
+│   ├── App.css
+│   ├── App.js
+│   ├── App.test.js
+│   ├── index.css
+│   ├── index.js
+│   ├── reportWebVitals.js
+│   └── setupTests.js
+├── .gitignore
+├── package-lock.json
+├── package.json
 └── README.md
 ```
 ## 🛠 페이지 소개
