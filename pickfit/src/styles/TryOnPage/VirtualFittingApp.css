@@ -302,6 +302,19 @@
     gap: 20px;
     flex-wrap: wrap;
   }
+
+/* 모델 이미지 스타일 */
+.model-item, .cloth-item {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.model-item img, .cloth-item img {
+  width: 100%;
+  max-width: 200px;
+  border: 2px solid #007bff;
+  border-radius: 8px;
+}
   
   .model-card, .item-card {
     width: 300px;
@@ -398,7 +411,40 @@
     max-width: 100%; /* 이미지의 최대 너비를 부모 요소에 맞춤 */
     max-height: 100%; /* 이미지의 최대 높이를 부모 요소에 맞춤 */
     object-fit: contain; /* 이미지 비율을 유지하며 부모 요소 안에 맞춤 */
+    cursor: pointer;
   }
+
+  /* 강조된 이미지 스타일 */
+.image-item.selected {
+  border: 3px solid #007bff;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.slide-bar-model {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.slide-bar-model img {
+  width: 100%;
+  max-width: 200px;
+  border: 2px solid #007bff;
+  border-radius: 8px;
+}
+
+/* 가상 피팅 이미지 스타일 */
+.selected-fitted-image {
+  margin-top: 20px;
+}
+
+.selected-fitted-image img {
+  width: 100%;
+  max-width: 300px;
+  border: 2px solid #28a745;
+  border-radius: 8px;
+}
+
 
   .register-div {
     position: absolute;
