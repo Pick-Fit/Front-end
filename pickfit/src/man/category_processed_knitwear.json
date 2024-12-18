@@ -1,7 +1,25 @@
 [
     {
         "product_info": {
-            "id": 1,
+            "id": 99,
+            "brand": "아미",
+            "title": "리브드 코튼 울 스웨터 아이보리",
+            "price": "214,000",
+            "detail_page_url": "https://www.trenbe.com/product/197+62852693?catalog=&view=ad",
+            "images": [
+                "https://i.ibb.co/54m2b3n/white-knit.webp"
+            ]
+        },
+        "style_analysis": {
+            "final_style": "chic_sporty"
+        },
+        "category_analysis": {
+            "big_category": "top"
+        }
+    },
+    {
+        "product_info": {
+            "id": 5,
             "brand": "톰브라운",
             "title": "트위드 4바 모헤어 니트 네이비 MKA489A Y1506 415 63383",
             "price": "993,330",

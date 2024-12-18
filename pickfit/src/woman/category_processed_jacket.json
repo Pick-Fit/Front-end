@@ -2,6 +2,24 @@
     {
         "product_info": {
             "id": 1,
+            "brand": "생로랑",
+            "title": "생로랑 가죽 자켓 481862YC2NI 1000 BLACK",
+            "price": "498,000",
+            "detail_page_url": "https://www.trenbe.com/product/++57686554?catalog=100221180",
+            "images": [
+                "https://i.ibb.co/vVzq2pg/jacket.jpg"
+            ]
+        },
+        "style_analysis": {
+            "final_style": "high_end_street"
+        },
+        "category_analysis": {
+            "big_category": "outer"
+        }
+    },
+    {
+        "product_info": {
+            "id": 3,
             "brand": "폴로랄프로렌",
             "title": "로렌 랄프로렌 브라운 체크 코듀로이 카라 퀼팅 누빔 경량 패딩 자켓 코트",
             "price": "498,000",

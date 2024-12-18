@@ -1,6 +1,42 @@
 [
     {
         "product_info": {
+            "id": 98,
+            "brand": "루이비통",
+            "title": "중고 1A90L6 56사이즈 블랙 레더 NBA 바스켓볼 재킷",
+            "price": "5,000,000",
+            "detail_page_url": "https://www.trenbe.com/product/++60531456?catalog=&options=owned",
+            "images": [
+                "https://image-cdn.trenbe.com/productmain/1698652174772-2796311b-45ad-41dc-b874-a8ceb53d1c85.jpeg"
+            ]
+        },
+        "style_analysis": {
+            "final_style": "cozy_minimal"
+        },
+        "category_analysis": {
+            "big_category": "outer"
+        }
+    },
+    {
+        "product_info": {
+            "id": 3,
+            "brand": "르메르",
+            "title": "24FW 르메르 가죽 자켓",
+            "price": "322,400",
+            "detail_page_url": "https://www.trenbe.com/product/++101127464?catalog=100927083",
+            "images": [
+                "https://i.ibb.co/gDpBWjb/leather-jacket.jpg"
+            ]
+        },
+        "style_analysis": {
+            "final_style": "cozy_minimal"
+        },
+        "category_analysis": {
+            "big_category": "outer"
+        }
+    },
+    {
+        "product_info": {
             "id": 1,
             "brand": "스투시",
             "title": "웨이브 다이 비치 쉘 자켓 블랙",
