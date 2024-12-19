@@ -2,6 +2,43 @@
     {
         "product_info": {
             "id": 1,
+            "brand": "디스퀘어드2",
+            "title": "디스퀘어드2 데님 스트레이트 팬츠 GS74LB1333S30342470 Blue Blue",
+            "price": "406,000",
+            "detail_page_url": "https://www.trenbe.com/product/1083+75486695?catalog=&view=ad",
+            "images": [
+                "https://image-cdn.trenbe.com/product-images/1712327570434_df53433f622f53b30dc6e3ee9bdd970c_0.jpg"
+            ]
+        },
+        "style_analysis": {
+            "final_style": "chic_sporty"
+        },
+        "category_analysis": {
+            "big_category": "bottom"
+        }
+    },
+    {
+        "product_info": {
+            "id": 97,
+            "brand": "버버리",
+            "title": "버버리 슬림 핏 플로랄 엠브로이더드 코튼 치노팬츠 바지 브랜드",
+            "price": "300,100",
+            "detail_page_url": "https://www.trenbe.com/product/879+72079089?catalog=100033039",
+            "images": [
+                "https://image-cdn.trenbe.com/product-images/1732599911786_de4127a4f1830e3c9c603ff5504ad4fc_0.jpeg"
+            ]
+        },
+        "style_analysis": {
+            "final_style": "chic_sporty"
+        },
+        "category_analysis": {
+            "big_category": "bottom"
+        }
+    },
+
+    {
+        "product_info": {
+            "id": 3,
             "brand": "톰브라운",
             "title": "톰브라운 스트레이트 팬츠 MTC213A05385 025",
             "price": "3,357,000",

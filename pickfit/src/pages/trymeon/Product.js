@@ -1,16 +1,19 @@
+// Product 컴포넌트
 import React, { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTryOn } from "../../contexts/TryOnContext";
-import axios from "axios";
 import "../../styles/trymeon/Product.css";
 import wishlistRed from "../../images/wishlist_rad.png";
 import whishlistBlack from "../../images/wishlist_black.png";
 import checkWhiteIcon from "../../images/check_white.png";
 import RecommendationPopup from "./RecommendationPopup";
 import { SelectedItemContext } from "../../contexts/SelectedItemContext";
-import "../../styles/trymeon/TryOnButton.css"
-const API_URL = process.env.REACT_APP_API_URL;
-const API_Store_URL = process.env.REACT_Store_API_URL;
+import "../../styles/trymeon/TryOnButton.css";
+
+// JSON 데이터 임포트
+import blazerSuitData from "../../stylistJson/man/annotated_category_processed_Blazer_Suit.json";
+import coatData from "../../stylistJson/man/annotated_category_processed_Coat.json";
+// 필요한 다른 JSON 파일들도 동일한 방식으로 임포트
 
 const Product = ({ images = [], removingItems = [] }) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -34,40 +37,7 @@ const Product = ({ images = [], removingItems = [] }) => {
     });
   }, []);
 
-  useEffect(() => {
-    const fetchWishlist = async () => {
-      try {
-        const response = await axios.get(
-          `${API_URL}/api/wishlist/${user.email}`
-        );
-        const wishlistData = response.data?.data || [];
-        setWishlist(wishlistData);
-
-        const iconsState = wishlistData.reduce((acc, item) => {
-          acc[item.productId] = true;
-          return acc;
-        }, {});
-        setClickedIcons(iconsState);
-      } catch (error) {
-        console.error("Failed to fetch wishlist:", error.message);
-      }
-    };
-
-    if (user.email) {
-      fetchWishlist();
-    }
-  }, [user.email]);
-
   const handleTryOnClick = (image) => {
-    console.log("Try On Clicked:");
-    console.log({
-      email: user.email, // 사용자 이메일
-      id: image.id,      // 상품 ID
-      src: image.src,    // 상품 이미지 URL
-      bigCategory: image.bigCategory, // 상품 대분류
-    });
-  
-    // 선택된 데이터를 context에 저장
     setSelectedItem({
       id: image.id,
       name: image.name,
@@ -75,22 +45,51 @@ const Product = ({ images = [], removingItems = [] }) => {
       price: image.price,
       bigCategory: image.bigCategory,
     });
-  
-    // Update the isTriedOn state for the clicked image
+
     setIsTriedOn((prevState) => ({
       ...prevState,
-      [image.id]: true,  // image.id로 tried on 상태 업데이트
+      [image.id]: true,
     }));
   };
-  
 
-  const handlePopupOpen = (imageId) => {
-    const randomRecommended = images
-      .filter((image) => image.id !== imageId)
-      .sort(() => 0.5 - Math.random())
-      .slice(0, 4);
-    setRecommendedProducts(randomRecommended);
-    setShowPopup(true);
+  const getRecommendationsByCategory = (name) => {
+    const data = blazerSuitData; // 현재는 blazerSuitData만 사용. 추가 JSON 데이터가 필요한 경우 확장 가능
+
+    // name 기준으로 추천 데이터 찾기
+    const matchedItem = data.find((item) => item.product_info.title === name);
+    if (matchedItem) {
+      console.log("매칭된 데이터 발견:", matchedItem);
+      return matchedItem.recommendations;
+    } else {
+      console.error("Name not found in JSON data:", name);
+      return { tops: [], bottoms: [] };
+    }
+  };
+
+  const handlePopupOpen = (image) => {
+    console.log("코디 추천 클릭 - 선택된 이미지 데이터:", image);
+    try {
+      console.log("추천 상품을 가져오는 중:", image.name);
+      const recommendations = getRecommendationsByCategory(image.name);
+      console.log("추천 상품 로드 완료:", recommendations);
+
+      const formattedRecommendations = [
+        ...recommendations.tops.slice(0, 2).map((item) => ({
+          ...item,
+          type: "top",
+        })),
+        ...recommendations.bottoms.slice(0, 2).map((item) => ({
+          ...item,
+          type: "bottom",
+        })),
+      ];
+
+      setRecommendedProducts(formattedRecommendations);
+      setShowPopup(true);
+      console.log("추천 팝업 열림. 추천 상품 목록:", formattedRecommendations);
+    } catch (error) {
+      console.error("추천 상품을 처리하는 데 실패했습니다:", error.message);
+    }
   };
 
   const handleWishlistClick = async (e, image) => {
@@ -106,10 +105,7 @@ const Product = ({ images = [], removingItems = [] }) => {
       const isCurrentlyRed = clickedIcons[image.id] || false;
 
       if (isCurrentlyRed) {
-        await axios.delete(`${API_URL}/api/wishlist/${image.id}`, {
-          params: { userEmail: user.email },
-        });
-
+        console.log("위시리스트에서 제거 중:", image.id);
         setClickedIcons((prev) => {
           const updatedIcons = { ...prev };
           delete updatedIcons[image.id];
@@ -120,28 +116,28 @@ const Product = ({ images = [], removingItems = [] }) => {
           return prev.filter((item) => item.productId !== image.id);
         });
       } else {
-        const response = await axios.post(`${API_URL}/api/wishlist`, {
-          productId: image.id,
-          title: image.name,
-          price: image.price,
-          imageUrl: image.src,
-          userEmail: user.email,
-          userName: user.name,
-        });
-
+        console.log("위시리스트에 추가 중:", image.id);
         setClickedIcons((prev) => {
           return { ...prev, [image.id]: true };
         });
 
         setWishlist((prev) => {
-          return [...prev, response.data];
+          return [...prev, { productId: image.id, ...image }];
         });
       }
     } catch (error) {
-      console.error("Error handling wishlist action:", error.message);
+      console.error("위시리스트 작업 중 오류 발생:", error.message);
     } finally {
       setIsLoading(false);
     }
+  };
+
+  const handleBlazerSuitDataCheck = () => {
+    console.log("블레이저 JSON 데이터:", blazerSuitData);
+  };
+
+  const handleCoatDataCheck = () => {
+    console.log("코트 JSON 데이터:", coatData);
   };
 
   return (
@@ -155,7 +151,7 @@ const Product = ({ images = [], removingItems = [] }) => {
         >
           <div
             className="recommendation-tag"
-            onClick={() => handlePopupOpen(image.id)}
+            onClick={() => handlePopupOpen(image)}
           >
             <div
               className="circle"
@@ -164,7 +160,7 @@ const Product = ({ images = [], removingItems = [] }) => {
             >
               <span className="recommendation-text">
                 {hoveredImage === image.id ? (
-                  "click!"
+                  "클릭!"
                 ) : (
                   <>
                     <p className="recommendation-part">코디</p>
@@ -194,7 +190,7 @@ const Product = ({ images = [], removingItems = [] }) => {
                   className="check-icon"
                 />
               ) : (
-                "Try On"
+                "입어보기"
               )}
             </div>
           </div>

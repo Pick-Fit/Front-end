@@ -1,6 +1,24 @@
 [
     {
         "product_info": {
+            "id": 99,
+            "brand": "몽클레르",
+            "title": "테디 플리스 봄버 Plattiers Teddy Fleece Bomber 1A000-14-899N5-034 White",
+            "price": "1,319,000",
+            "detail_page_url": "https://www.trenbe.com/product/++64942997?catalog=100651961",
+            "images": [
+                "https://image-cdn.trenbe.com/product-images/1703240014040_3b72ccf77f6f33aa112cb7ba3796c8c8_0.jpg"
+            ]
+        },
+        "style_analysis": {
+            "final_style": "high_end_street"
+        },
+        "category_analysis": {
+            "big_category": "outer"
+        }
+    },
+    {
+        "product_info": {
             "id": 1,
             "brand": "스톤아일랜드",
             "title": "스톤아일랜드 24FW 남성 와펜 패치 다운 패딩 블랙 성인사이즈 811640223 V0029 14Y",

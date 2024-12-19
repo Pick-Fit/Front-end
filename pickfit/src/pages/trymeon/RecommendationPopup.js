@@ -1,3 +1,4 @@
+// RecommendationPopup 컴포넌트
 import React from "react";
 import TryOnButton from "../trymeon/TryOnButton"; // TryOnButton 불러오기
 import "../../styles/trymeon/RecommendationPopup.css";
@@ -10,9 +11,9 @@ const RecommendationPopup = ({ onClose, recommendedProducts = [] }) => {
         <h3>코디 추천 상품</h3>
         <div className="recommended-products">
           {recommendedProducts.map((product, index) => (
-            <div key={product.id} className={`recommended-product row-${index < 2 ? 'top' : 'bottom'}`}>
+            <div key={`${product.name}-${index}`} className={`recommended-product row-${index < 2 ? 'top' : 'bottom'}`}>
               <img
-                src={product.src}
+                src={product.images}
                 alt={product.name}
                 className="recommended-product-image"
               />

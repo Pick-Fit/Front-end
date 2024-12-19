@@ -11,7 +11,7 @@ const HeaderWelcome = ({ isLoggedIn, userName, remainingTime }) => {
           </span>
         </>
       ) : (
-        <span style={styles.welcomeMessage}>로그인이 필요합니다.</span>
+        <span style={styles.welcomeMessage}></span>
       )}
     </div>
   );

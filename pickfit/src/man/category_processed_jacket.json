@@ -1,6 +1,24 @@
 [
     {
         "product_info": {
+            "id": 98,
+            "brand": "레이디볼륨",
+            "title": "60127 SIGNATURE LEATHER PADDING_BROWN",
+            "price": "99,000",
+            "detail_page_url": "https://www.trenbe.com/product/++44860940?catalog=100033613",
+            "images": [
+                "https://cf.product-image.s.zigzag.kr/original/c/13/187/650/131876507-1950302222835059008.jpeg?width=400&height=400&quality=80&format=webp"
+            ]
+        },
+        "style_analysis": {
+            "final_style": "formal_minimal"
+        },
+        "category_analysis": {
+            "big_category": "outer"
+        }
+    },
+    {
+        "product_info": {
             "id": 3,
             "brand": "휴고보스",
             "title": "자켓 Belton Jacket 613143 Black 001",

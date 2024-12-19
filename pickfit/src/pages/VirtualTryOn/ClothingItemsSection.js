@@ -19,20 +19,16 @@ const ClothingItemsSection = ({
 
   const modelData = [
     {
-      id: "model1",
-      imageUrl: "https://i.ibb.co/TRhZzwh/processed-image.png",
+      id: "1",
+      imageUrl: "https://i.ibb.co/VCR5Y6X/Kakao-Talk-20241212-145417073-04.jpg",
     },
     {
-      id: "model2",
-      imageUrl: "http://localhost:8000/static/20241212181223_output.jpg",
+      id: "2",
+      imageUrl: "https://i.ibb.co/5Mwkxy4/model.webp",
     },
     {
-      id: "model3",
-      imageUrl: "https://file.mk.co.kr/meet/neds/2021/09/image_readtop_2021_925000_16328773574798448.jpg",
-    },
-    {
-      id: "model4",
-      imageUrl: "C:\Users\hi\OneDrive\바탕 화면\KakaoTalk_20241216_201323882.png",
+      id: "3",
+      imageUrl: "https://i.ibb.co/VSgRkkF/tshirts.jpg",
     },
   ];
 
@@ -42,8 +38,10 @@ const ClothingItemsSection = ({
   const [activeSection, setActiveSection] = useState("items");
 
   const handleRegisterProduct = (id, src, bigCategory) => {
+    console.log("등록된 상품 데이터:", { id, src, bigCategory }); // 상품 데이터 로그 출력
     setSelectedItemForProduct({ id, src, bigCategory });
   };
+  
 
   const handleRegisterModel = (id, src) => {
     setSelectedItemForModel({ id, src });
@@ -122,17 +120,21 @@ const ClothingItemsSection = ({
                 <img src={leftArrow} alt="Left Arrow" />
               </div>
               {modelsToShow.map((model) => (
-                <div className="model-card" key={model.id}>
-                  <img src={model.imageUrl} alt={model.name} />
-                  <p>{model.name}</p>
-                  <div
-                    className="register-btn"
-                    onClick={() => handleRegisterModel(model.id, model.imageUrl)}
-                  >
-                    등록
-                  </div>
+              <div className="model-card" key={model.id}>
+                <img
+                  src={model.imageUrl}
+                  alt={model.name}
+                  style={{ width: "300px", height: "400px", objectFit: "cover" }} // 크기 조정
+                />
+                <p>{model.name}</p>
+                <div
+                  className="register-btn"
+                  onClick={() => handleRegisterModel(model.id, model.imageUrl)}
+                >
+                  등록
                 </div>
-              ))}
+              </div>
+            ))}
               <div className="arrow-button_right" onClick={goToNextModelPage}>
                 <img src={rightArrow} alt="Right Arrow" />
               </div>
