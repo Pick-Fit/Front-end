@@ -30,10 +30,6 @@ const ClothingItemsSection = ({
       id: "3",
       imageUrl: "https://i.ibb.co/VSgRkkF/tshirts.jpg",
     },
-    {
-      id: "4",
-      imageUrl: "https://thumb.mt.co.kr/06/2021/09/2021090110500034570_2.jpg",
-    },
   ];
 
   const [modelPage, setModelPage] = useState(0);

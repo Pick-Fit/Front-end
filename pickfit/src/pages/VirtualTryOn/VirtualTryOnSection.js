@@ -146,6 +146,11 @@ const VirtualTryOnSection = ({ selectedItemForProduct, selectedItemForModel }) =
         productSrc === "https://image-cdn.trenbe.com/product-images/1703240014040_3b72ccf77f6f33aa112cb7ba3796c8c8_0.jpg"
       ) {
         setResultImage("https://i.ibb.co/bmb43V8/output112.png");
+      } else if (
+        modelSrc === "https://i.ibb.co/5Mwkxy4/model.webp" &&
+        productSrc === "https://i.ibb.co/vVzq2pg/jacket.jpg"
+      ) {
+        setResultImage("https://i.ibb.co/Q81H417/model-outer.png");
       } else {
         alert("해당 조합에 대한 결과 이미지를 찾을 수 없습니다.");
       }
@@ -156,6 +161,7 @@ const VirtualTryOnSection = ({ selectedItemForProduct, selectedItemForModel }) =
       console.error("서버 오류: ", error.response ? error.response.data : error.message);
     }
   };
+  
   
   
   
